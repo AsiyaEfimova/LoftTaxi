@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'adobeclean-regular';
+    src: url('../fonts/adobeclean-regular.woff') format('woff'),
+    url('../fonts/adobeclean-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'adobeclean-bold';
+    src: url('../fonts/adobeclean-bold.woff') format('woff'),
+    url("../fonts/adobeclean-bold.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@import "variables.scss";
+@import "index.scss";

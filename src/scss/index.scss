@@ -1,0 +1,101 @@
+* {margin: 0; padding: 0; outline: none; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;}
+*:before, *:after {box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;}
+html {height: 100%;}
+body {height: 100%; min-height: 100%; font: normal 16px/1.4 $font-regular; color: $dark;}
+
+aside, nav, footer, header, section, article, menu {display: block;}
+
+a {color: inherit; cursor:pointer;}
+a img {border:none;}
+img {vertical-align: middle; max-width: 100%; height: auto;}
+
+p {margin:0 0 15px 0;}
+
+//em, i {font: normal 1em/1.4 $font-regular_italic;}
+strong, b {font: normal 1em/1.4 $font-bold;}
+
+ol {margin: 0 0 15px 35px;}
+ol li {margin: 0 0 10px 0;}
+ul {margin: 0 0 15px 35px;}
+ul li {margin: 0 0 10px 0;}
+
+nav ul, nav ul li {list-style: none; margin: 0;}
+
+/* Titles */
+h1, .H1 {font: normal 1.25em/1.2 $font-bold; margin: 0 0 15px 0; color: $white;}
+h2, .H2 {font: normal 1.125em/1.4 $font-bold; margin: 0 0 15px 0; color: $dark;}
+h3, .H3 {
+    font: normal 1em/1.4 $font-regular;
+    margin: 0 0 15px 0;
+    color: $dark;
+    .helpBlock {
+        margin: 0 0 0 5px;
+    }
+}
+h4, .H4 {font: normal 1em/1.4 $font-regular; margin: 0 0 15px 0; color: $dark;}
+
+/* Grid */
+#root {
+    height: 100%;
+    min-width: 320px;
+}
+#pageWrap {
+    height: 100%;
+    min-width: 320px;
+    position: relative;
+    overflow: hidden;
+    padding: 78px 0 0 0;
+    background: $dark;
+}
+#headerWrap {
+    height: 78px;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    background: $white;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+}
+#page {
+    position: relative;
+}
+
+.widthFix {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+.clearfix {
+    display: block;
+    width: 100%;
+    height: 0;
+    clear: both;
+}
+
+header {
+    height: 100%;
+    padding: 20px 15px;
+    @include flex(center, space-between,'','');
+    .logo {
+        display: block;
+        width: 154px;
+        height: 37px;
+    }
+}
+.topNav {
+    @include flex(center, '','','');
+    a {
+        margin: 0 0 0 35px;
+        text-decoration: none;
+    }
+}
+
+
+/*
+
+*/
+
+
+@include laptop {}
+@include desktop {}
