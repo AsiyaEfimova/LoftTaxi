@@ -1,17 +1,27 @@
-import React from 'react';
+import React, {Component} from 'react';
 import logo from '../img/logo-white.png';
 
-export class Signup extends React.Component {
+class Signup extends Component {
+    constructor(props) {
+        super(props);
+        this.GoToPage = props.handler;
+    }
+
+    HandleSubmit = (e) => {
+        e.preventDefault();
+        this.GoToPage("map");
+    };
+
     render() {
         return (
             <div id="entryPage">
                 <div className="widthFix">
                     <div className="content">
                         <div className="logoBox">
-                        <img src={logo} className="logo" alt="logo"/>
-                    </div>
+                            <img src={logo} className="logo" alt="logo"/>
+                        </div>
                         <div className="formBox">
-                            <form className="entryForm">
+                            <form className="entryForm" onSubmit={this.HandleSubmit}>
                                 <h1>Регистрация</h1>
                                 <p>Уже зарегистрирован? <a href="#">Войти</a></p>
                                 <div className="fieldset">
@@ -42,4 +52,4 @@ export class Signup extends React.Component {
     }
 }
 
-// export default Signup;
+export default Signup;
