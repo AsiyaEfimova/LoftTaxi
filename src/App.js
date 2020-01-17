@@ -15,7 +15,7 @@ const PAGES = {
 };
 
 class App extends Component {
-  state = {page: "login"};
+  state = {page: "signup"};
 
   SetPage = (e) => {
     e.preventDefault();

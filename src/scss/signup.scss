@@ -1,0 +1,124 @@
+.input {
+    position: relative;
+    input, textarea {
+        display: block;
+        width: 100%;
+        position: relative;
+        z-index: 1;
+        background: $white;
+        color: $dark;
+        border: none;
+        border-bottom: 1px solid $grayEA;
+        margin-bottom: 1px;
+        &:disabled {
+            cursor: default;
+        }
+        &:focus {
+            border-bottom: 2px solid $blue;
+            margin-bottom: 0;
+        }
+    }
+    input {
+        font: normal 16px/30px $font-regular;
+    }
+    textarea {
+        font: normal 16px/1.2 $font-regular;
+        padding: 8px 0;
+        min-height: 175px;
+    }
+    label {
+        color: $middlegray;
+        display: block;
+    }
+    &.error {
+        input, textarea {
+            border: 1px solid $red;
+            color: $red;
+        }
+        .error {
+            font: normal 14px/1.2 $font-regular;
+            color: $red;
+        }
+    }
+    &.complete {
+        input, textarea {
+            border: 1px solid $blue;
+        }
+    }
+}
+.button {
+    display: inline-block;
+    vertical-align: middle;
+    border: none;
+    background: $yellow;
+    border-radius: 3px;
+    font: normal 21px/47px $font-regular;
+    padding: 3px 30px 0 30px;
+}
+#entryPage {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    background: $dark;
+    &:before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: url(../img/bg.jpg) center center;
+        background-size: cover;
+        opacity: .25;
+    }
+    .widthFix {
+        height: 100%;
+    }
+    .content {
+        @include flex(center,center,'','');
+        height: 100%;
+    }
+    .logoBox {
+        width: 50%;
+        text-align: center;
+    }
+    .formBox {
+        width: 50%;
+        .entryForm {
+            max-width: 500px;
+            background: $white;
+            color: $darkgray;
+            border-radius: 3px;
+            padding: 65px 50px;
+            &:after {
+                content: '';
+                display: block;
+                clear: both;
+            }
+            p {
+                margin: 0 0 40px 0;
+            }
+            a {
+                color: $blue;
+                text-decoration: none;
+            }
+            .fieldset {
+                @include flex(flex-start,space-between,'',wrap);
+            }
+            .input {
+                width: 100%;
+                margin: 0 0 40px 0;
+                &.half {
+                    max-width: 47%;
+                }
+            }
+            .button {
+                float: right;
+            }
+        }
+    }
+}

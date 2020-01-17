@@ -22,17 +22,9 @@ ul li {margin: 0 0 10px 0;}
 nav ul, nav ul li {list-style: none; margin: 0;}
 
 /* Titles */
-h1, .H1 {font: normal 1.25em/1.2 $font-bold; margin: 0 0 15px 0; color: $white;}
-h2, .H2 {font: normal 1.125em/1.4 $font-bold; margin: 0 0 15px 0; color: $dark;}
-h3, .H3 {
-    font: normal 1em/1.4 $font-regular;
-    margin: 0 0 15px 0;
-    color: $dark;
-    .helpBlock {
-        margin: 0 0 0 5px;
-    }
-}
-h4, .H4 {font: normal 1em/1.4 $font-regular; margin: 0 0 15px 0; color: $dark;}
+h1, .H1 {font: normal 36px/1.2 $font-bold; margin: 0 0 15px 0;}
+h2, .H2 {font: normal 24px/1.4 $font-bold; margin: 0 0 15px 0;}
+h3, .H3 {font: normal 20px/1.4 $font-bold; margin: 0 0 15px 0;}
 
 /* Grid */
 #root {
@@ -41,11 +33,12 @@ h4, .H4 {font: normal 1em/1.4 $font-regular; margin: 0 0 15px 0; color: $dark;}
 }
 #pageWrap {
     height: 100%;
+    min-height: 700px;
     min-width: 320px;
     position: relative;
     overflow: hidden;
     padding: 78px 0 0 0;
-    background: $dark;
+    //background: $dark;
 }
 #headerWrap {
     height: 78px;
@@ -59,12 +52,14 @@ h4, .H4 {font: normal 1em/1.4 $font-regular; margin: 0 0 15px 0; color: $dark;}
 }
 #page {
     position: relative;
+    height: 100%;
 }
 
 .widthFix {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
+    position: relative;
 }
 .clearfix {
     display: block;
@@ -90,12 +85,6 @@ header {
         text-decoration: none;
     }
 }
-
-
-/*
-
-*/
-
 
 @include laptop {}
 @include desktop {}
