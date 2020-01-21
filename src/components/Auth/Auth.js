@@ -1,15 +1,10 @@
 import React from 'react';
 import logo from '../../img/logo-white.png';
 import Signup from "./Signup";
-import Signin from "./Signin";
 
 class Auth extends React.Component {
-    constructor(props) {
-        super(props);
-        this.routeHandler = props.routeHandler;
-    }
     HandlerSubmit = () => {
-        this.routeHandler("map");
+        this.props.routeHandler("map");
     };
     render() {
         return (
@@ -20,7 +15,7 @@ class Auth extends React.Component {
                             <img src={logo} className="logo" alt="logo"/>
                         </div>
                         <div className="formBox">
-                            <Signup submit={this.HandlerSubmit}/>
+                            <Signup handlerSubmit={this.HandlerSubmit}/>
                         </div>
                     </div>
                 </div>

@@ -2,13 +2,9 @@ import React, {Component} from 'react';
 import logo from '../../img/logo.png';
 
 class Header extends Component {
-    constructor(props) {
-        super(props);
-        this.routeHandler = props.routeHandler;
-    }
     HandleClick = (pageValue) => (e) => {
         e.preventDefault();
-        this.routeHandler(pageValue);
+        this.props.routeHandler(pageValue);
     };
     render(){
         return (
