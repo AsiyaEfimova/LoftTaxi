@@ -1,5 +1,5 @@
-import React from 'react';
-import Header from "../Header";
+import React from 'react'
+import Header from '../Header'
 
 class Profile extends React.Component {
     render() {
@@ -10,7 +10,8 @@ class Profile extends React.Component {
                     <h1>Profile</h1>
                 </div>
             </>
-        );
+        )
     }
 }
-export default Profile;
+
+export default Profile

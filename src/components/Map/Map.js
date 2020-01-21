@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import Header from '../Header'
 
 class Map extends React.Component {
@@ -10,7 +10,7 @@ class Map extends React.Component {
                     <h1>Map</h1>
                 </div>
             </>
-        );
+        )
     }
 }
-export default Map;
+export default Map
