@@ -1,11 +1,11 @@
-import React from 'react'
-import logo from '../../img/logo-white.png'
-import Signup from './Signup'
+import React from 'react';
+import logo from '../../img/logo-white.png';
+import Signup from './Signup';
 
 class Auth extends React.Component {
     HandlerSubmit = () => {
-        this.props.routeHandler('map')
-    }
+        this.props.routeHandler('map');
+    };
     render() {
         return (
             <div id="entryPage">
@@ -20,8 +20,8 @@ class Auth extends React.Component {
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 
-export default Auth
+export default Auth;

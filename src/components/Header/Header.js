@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import logo from '../../img/logo.png'
+import React, { Component } from 'react';
+import logo from '../../img/logo.png';
 
 class Header extends Component {
     HandleClick = (pageValue) => (e) => {
-        e.preventDefault()
-        this.props.routeHandler(pageValue)
-    }
+        e.preventDefault();
+        this.props.routeHandler(pageValue);
+    };
     render() {
         return (
             <div id="headerWrap">
@@ -43,8 +43,7 @@ class Header extends Component {
                     </nav>
                 </header>
             </div>
-        )
+        );
     }
 }
-
-export default Header
+export default Header;

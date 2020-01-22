@@ -1,19 +1,19 @@
-import React from 'react'
-import Input from '../../elements/Input'
-import Button from '../../elements/Button'
+import React from 'react';
+import Input from '../../elements/Input';
+import Button from '../../elements/Button';
 
 class Signin extends React.Component {
     state = {
         name: '',
         password: ''
-    }
+    };
     HandleSubmit = (e) => {
-        e.preventDefault()
-        this.props.handlerSubmit()
-    }
+        e.preventDefault();
+        this.props.handlerSubmit();
+    };
     HandlerInputChange = ({ name, value }) => {
-        this.setState({ [name]: value })
-    }
+        this.setState({ [name]: value });
+    };
     render() {
         return (
             <form className="entryForm" onSubmit={this.HandleSubmit}>
@@ -37,8 +37,7 @@ class Signin extends React.Component {
                 </div>
                 <Button text="Войти" />
             </form>
-        )
+        );
     }
 }
-
-export default Signin
+export default Signin;

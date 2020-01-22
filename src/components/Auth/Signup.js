@@ -1,6 +1,6 @@
-import React from 'react'
-import Input from '../../elements/Input'
-import Button from '../../elements/Button'
+import React from 'react';
+import Input from '../../elements/Input';
+import Button from '../../elements/Button';
 
 class Signup extends React.Component {
     state = {
@@ -8,14 +8,14 @@ class Signup extends React.Component {
         name: '',
         surname: '',
         password: ''
-    }
+    };
     HandleSubmit = (e) => {
-        e.preventDefault()
-        this.props.handlerSubmit()
-    }
+        e.preventDefault();
+        this.props.handlerSubmit();
+    };
     HandlerInputChange = ({ name, value }) => {
-        this.setState({ [name]: value })
-    }
+        this.setState({ [name]: value });
+    };
     render() {
         return (
             <form className="entryForm" onSubmit={this.HandleSubmit}>
@@ -53,8 +53,7 @@ class Signup extends React.Component {
                 </div>
                 <Button text="Зарегистрироваться" />
             </form>
-        )
+        );
     }
 }
-
-export default Signup
+export default Signup;
