@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import logo from '../../img/logo.png';
+import {Context} from '../../App';
 
 class Header extends Component {
+    AuthInfo = Context.Provider._context._currentValue;
     HandleClick = (pageValue) => (e) => {
         e.preventDefault();
+        if(!pageValue) {
+            this.AuthInfo.logout();
+            pageValue = 'auth';
+        }
         this.props.routeHandler(pageValue);
     };
     render() {
@@ -29,16 +35,9 @@ class Header extends Component {
                         <a
                             href="/"
                             className="navLink"
-                            onClick={this.HandleClick('auth')}
+                            onClick={this.HandleClick()}
                         >
                             Выйти
-                        </a>
-                        <a
-                            href="/"
-                            className="navLink"
-                            onClick={this.HandleClick('auth')}
-                        >
-                            Регистрация
                         </a>
                     </nav>
                 </header>

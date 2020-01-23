@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../../img/logo-white.png';
 import Signup from './Signup';
+import Signin from './Signin';
 
 class Auth extends React.Component {
     HandlerSubmit = () => {
@@ -15,7 +16,7 @@ class Auth extends React.Component {
                             <img src={logo} className="logo" alt="logo" />
                         </div>
                         <div className="formBox">
-                            <Signup handlerSubmit={this.HandlerSubmit} />
+                            <Signin handlerSubmit={this.HandlerSubmit} />
                         </div>
                     </div>
                 </div>
