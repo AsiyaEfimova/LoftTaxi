@@ -21,8 +21,11 @@ ul li {margin: 0 0 10px 0;}
 
 nav ul, nav ul li {list-style: none; margin: 0;}
 
+fieldset {display: block; border: none;}
+
 /* Titles */
 h1, .H1 {font: normal 36px/1.2 $font-bold; margin: 0 0 15px 0;}
+h1 small {font: normal 16px/1.4 $font-regular; display: block; color: $darkgray;}
 h2, .H2 {font: normal 24px/1.4 $font-bold; margin: 0 0 15px 0;}
 h3, .H3 {font: normal 20px/1.4 $font-bold; margin: 0 0 15px 0;}
 
@@ -32,7 +35,19 @@ h3, .H3 {font: normal 20px/1.4 $font-bold; margin: 0 0 15px 0;}
     min-width: 320px;
     position: relative;
     overflow: hidden;
-    //background: $dark;
+    background: $dark;
+    &:before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: url(../img/bg.jpg) center center;
+        background-size: cover;
+        opacity: .25;
+    }
 }
 #headerWrap {
     height: 78px;
@@ -77,8 +92,15 @@ header {
 .topNav {
     @include flex(center, '','','');
     .navLink {
-        margin: 0 0 0 35px;
-        cursor: pointer;
+        font: normal 16px/32px $font-regular;
+        padding: 0 15px;
+        border-radius: 2px;
+        text-decoration: none;
+        margin: 0 0 0 5px;
+        transition: $transition;
+        &:hover, &.current {
+            background: $grayF2;
+        }
     }
 }
 

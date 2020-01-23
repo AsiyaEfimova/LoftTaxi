@@ -1,0 +1,58 @@
+.paymentForm {
+    max-width: 950px;
+    margin: 80px auto;
+    background: $white;
+    border-radius: 3px;
+    padding: 60px 70px;
+    text-align: center;
+    .fieldSet {
+        margin: 0 -15px 45px -15px;
+        display: flex;
+    }
+    .card {
+        margin: 0 15px;
+        width: 50%;
+        background: $white;
+        border-radius: 10px;
+        box-shadow: 0 6px 20px rgba(0,0,0,.15);
+        padding: 30px;
+    }
+    .input {
+        margin: 0 0 30px 0;
+    }
+}
+
+
+
+
+
+/*
+    <fieldset>
+        <div className="cardIco"></div>
+        <Input
+            label="Номер карты:"
+            type="text"
+            name="cardNumber"
+        />
+        <Input
+            label="Срок действия:"
+            type="text"
+            name="cardValid"
+        />
+    </fieldset>
+    <fieldset>
+        <Input
+            label="Номер карты:"
+            type="text"
+            name="cardNumber"
+        />
+        <Input
+            label="Срок действия:"
+            type="text"
+            name="cardValid"
+        />
+    </fieldset>
+    <Button text="Сохранить" />
+    <div children="toolTip"></div>
+</form>
+*/
