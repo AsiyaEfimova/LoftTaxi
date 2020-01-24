@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import logo from '../../img/logo.png';
-import {Context} from '../../App';
+import {Context} from '../../context';
 
 class Header extends Component {
-    AuthInfo = Context.Provider._context._currentValue;
     HandleClick = (pageValue) => (e) => {
         e.preventDefault();
         if(!pageValue) {
-            this.AuthInfo.logout();
+            this.context.logout();
             pageValue = 'auth';
         }
         this.props.routeHandler(pageValue);
@@ -45,4 +44,5 @@ class Header extends Component {
         );
     }
 }
+Header.contextType = Context;
 export default Header;

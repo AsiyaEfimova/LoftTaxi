@@ -1,17 +1,16 @@
 import React from 'react';
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
-import {Context} from '../../App';
+import {Context} from '../../context';
 
 class Signin extends React.Component {
     state = {
         name: '',
         password: ''
     };
-    AuthInfo = Context.Provider._context._currentValue;
     HandleSubmit = (e) => {
         e.preventDefault();
-        if(this.AuthInfo.login(this.state.name, this.state.password)){
+        if(this.context.login(this.state.name, this.state.password)){
             this.props.handlerSubmit();
         }
     };
@@ -44,4 +43,5 @@ class Signin extends React.Component {
         );
     }
 }
+Signin.contextType = Context;
 export default Signin;
