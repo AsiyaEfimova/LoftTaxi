@@ -3,8 +3,8 @@ import './scss/app.scss';
 import Router from './components/Router';
 
 class App extends Component {
-    // state = { page: 'profile' };
-    state = { page: 'auth' };
+    state = { page: 'map' };
+    // state = { page: 'auth' };
 
     GoToPage = (page) => {
         this.setState({ page });
