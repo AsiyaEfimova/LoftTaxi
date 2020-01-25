@@ -2,6 +2,7 @@ import React from 'react';
 import logo from '../../img/logo-white.png';
 import Signup from './Signup';
 import Signin from './Signin';
+import PropTypes from 'prop-types';
 
 class Auth extends React.Component {
     HandlerSubmit = () => {
@@ -24,5 +25,7 @@ class Auth extends React.Component {
         );
     }
 }
-
+Auth.propTypes = {
+    routeHandler: PropTypes.func.isRequired
+};
 export default Auth;

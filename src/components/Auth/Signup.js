@@ -1,6 +1,7 @@
 import React from 'react';
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
+import PropTypes from "prop-types";
 
 class Signup extends React.Component {
     state = {
@@ -9,9 +10,10 @@ class Signup extends React.Component {
         surname: '',
         password: ''
     };
+    SubmitFunc = this.props.handlerSubmit;
     HandleSubmit = (e) => {
         e.preventDefault();
-        this.props.handlerSubmit();
+        this.SubmitFunc();
     };
     HandlerInputChange = ({ name, value }) => {
         this.setState({ [name]: value });
@@ -56,4 +58,7 @@ class Signup extends React.Component {
         );
     }
 }
+Signup.propTypes = {
+    handlerSubmit: PropTypes.func.isRequired
+};
 export default Signup;

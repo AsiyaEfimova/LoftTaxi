@@ -3,8 +3,7 @@ import './scss/app.scss';
 import Router from './components/Router';
 
 class App extends Component {
-    state = { page: 'map' };
-    // state = { page: 'auth' };
+    state = { page: 'auth' };
 
     GoToPage = (page) => {
         this.setState({ page });
@@ -13,9 +12,7 @@ class App extends Component {
     render() {
         const { page } = this.state;
         return (
-            // <Context.Provider value={Login}>
-                <Router route={page} pageSwitcher={this.GoToPage} />
-            // </Context.Provider>
+            <Router route={page} pageSwitcher={this.GoToPage} />
         );
     }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from '../../img/logo.png';
 import {Context} from '../../context';
+import PropTypes from "prop-types";
 
 class Header extends Component {
     HandleClick = (pageValue) => (e) => {
@@ -45,4 +46,7 @@ class Header extends Component {
     }
 }
 Header.contextType = Context;
+Header.propTypes = {
+    routeHandler: PropTypes.func.isRequired
+};
 export default Header;

@@ -2,16 +2,19 @@ import React from 'react';
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
 import {Context} from '../../context';
+import PropTypes from "prop-types";
 
 class Signin extends React.Component {
     state = {
         name: '',
         password: ''
     };
+    LoginFunc = this.context.login;
+    SubmitFunc = this.props.handlerSubmit;
     HandleSubmit = (e) => {
         e.preventDefault();
-        if(this.context.login(this.state.name, this.state.password)){
-            this.props.handlerSubmit();
+        if(this.LoginFunc(this.state.name, this.state.password)){
+            this.SubmitFunc();
         }
     };
     HandlerInputChange = ({ name, value }) => {
@@ -44,4 +47,7 @@ class Signin extends React.Component {
     }
 }
 Signin.contextType = Context;
+Signin.propTypes = {
+    handlerSubmit: PropTypes.func.isRequired
+};
 export default Signin;

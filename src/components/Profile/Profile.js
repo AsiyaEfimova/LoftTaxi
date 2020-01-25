@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../Header';
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
+import PropTypes from "prop-types";
 
 class Profile extends React.Component {
     render() {
@@ -51,4 +52,7 @@ class Profile extends React.Component {
         );
     }
 }
+Profile.propTypes = {
+    routeHandler: PropTypes.func.isRequired
+};
 export default Profile;
