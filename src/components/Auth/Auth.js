@@ -25,7 +25,7 @@ class Auth extends React.Component {
         );
     }
 }
-Auth.propTypes = {
-    routeHandler: PropTypes.func.isRequired
-};
+// Auth.propTypes = {
+//     routeHandler: PropTypes.func.isRequired
+// };
 export default Auth;

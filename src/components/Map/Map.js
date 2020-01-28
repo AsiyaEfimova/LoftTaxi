@@ -49,7 +49,7 @@ class Map extends React.Component {
         );
     }
 }
-Map.propTypes = {
-    routeHandler: PropTypes.func.isRequired
-};
+// Map.propTypes = {
+//     routeHandler: PropTypes.func.isRequired
+// };
 export default Map;

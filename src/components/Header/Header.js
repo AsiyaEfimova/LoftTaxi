@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from '../../img/logo.png';
 import {Context} from '../../context';
 import PropTypes from "prop-types";
+import { BrowserRouter, Link, withRouter } from 'react-router-dom';
 
 class Header extends Component {
     HandleClick = (pageValue) => (e) => {
@@ -16,29 +17,26 @@ class Header extends Component {
         return (
             <div id="headerWrap">
                 <header className="widthFix">
-                    <img src={logo} className="logo" alt="logo" />
+                    <Link to="/"><img src={logo} className="logo" alt="logo" /></Link>
                     <nav className="topNav">
-                        <a
-                            href="/"
+                        <Link
+                            to="/map"
                             className="navLink"
-                            onClick={this.HandleClick('map')}
                         >
                             Карта
-                        </a>
-                        <a
-                            href="/"
+                        </Link>
+                        <Link
+                            to="/profile"
                             className="navLink"
-                            onClick={this.HandleClick('profile')}
                         >
                             Профиль
-                        </a>
-                        <a
-                            href="/"
+                        </Link>
+                        <Link
+                            to="/"
                             className="navLink"
-                            onClick={this.HandleClick()}
                         >
                             Выйти
-                        </a>
+                        </Link>
                     </nav>
                 </header>
             </div>
@@ -46,7 +44,7 @@ class Header extends Component {
     }
 }
 Header.contextType = Context;
-Header.propTypes = {
-    routeHandler: PropTypes.func.isRequired
-};
+// Header.propTypes = {
+//     routeHandler: PropTypes.func.isRequired
+// };
 export default Header;

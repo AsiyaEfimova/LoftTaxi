@@ -52,7 +52,7 @@ class Profile extends React.Component {
         );
     }
 }
-Profile.propTypes = {
-    routeHandler: PropTypes.func.isRequired
-};
+// Profile.propTypes = {
+//     routeHandler: PropTypes.func.isRequired
+// };
 export default Profile;

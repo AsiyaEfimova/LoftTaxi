@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './scss/app.scss';
 import Router from './components/Router';
+import { BrowserRouter, Link, withRouter } from 'react-router-dom';
 
 class App extends Component {
     state = { page: 'auth' };
@@ -12,7 +13,9 @@ class App extends Component {
     render() {
         const { page } = this.state;
         return (
-            <Router route={page} pageSwitcher={this.GoToPage} />
+            <BrowserRouter>
+                <Router route={page} pageSwitcher={this.GoToPage} />
+            </BrowserRouter>
         );
     }
 }

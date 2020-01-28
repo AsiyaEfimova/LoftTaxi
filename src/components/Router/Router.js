@@ -3,19 +3,18 @@ import Profile from '../Profile';
 import Map from '../Map';
 import Auth from '../Auth';
 import PropTypes from "prop-types";
+import { Route, Redirect, Switch } from 'react-router-dom';
 
 class Router extends React.Component {
     render() {
-        switch (this.props.route) {
-            case 'profile':
-                return <Profile routeHandler={this.props.pageSwitcher} />;
-            case 'map':
-                return <Map routeHandler={this.props.pageSwitcher} />;
-            case 'auth':
-                return <Auth routeHandler={this.props.pageSwitcher} />;
-            default:
-                return <div>Страница не найдена</div>;
-        }
+        return (
+            <Switch>
+                <Route path="/" component={Auth} exact />
+                <Route path="/map" component={Map} />
+                <Route path="/profile" component={Profile} />
+                <Redirect to="/" />
+            </Switch>
+        );
     }
 }
 Router.propTypes = {
