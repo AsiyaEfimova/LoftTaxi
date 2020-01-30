@@ -4,21 +4,48 @@ import Map from '../Map';
 import Auth from '../Auth';
 import PropTypes from "prop-types";
 import { Route, Redirect, Switch } from 'react-router-dom';
+// import {store} from "../../context";
+import {connect} from 'react-redux';
 
-class Router extends React.Component {
-    render() {
-        return (
-            <Switch>
-                <Route path="/" component={Auth} exact />
-                <Route path="/map" component={Map} />
-                <Route path="/profile" component={Profile} />
-                <Redirect to="/" />
-            </Switch>
-        );
-    }
-}
-Router.propTypes = {
-    pageSwitcher: PropTypes.func.isRequired,
-    route: PropTypes.string.isRequired
+let PrivateRoute = () => {
+    const isAuthorized = true;
+    console.log(isAuthorized);
+    return <Route
+            render={routeProps =>
+                isAuthorized ? (
+                    <Route {...routeProps} />
+                ) : (
+                    <Redirect to={"/"} />
+                )
+            }
+        />;
 };
-export default Router;
+
+const Router = () => {
+    return (
+        <Switch>
+            <PrivateRoute component={Map} path="/map"/>
+            <Route path="/" component={Auth} exact />
+            <Route path="/map" component={Map} />
+            <Route path="/profile" component={Profile} />
+            <Redirect to="/" />
+        </Switch>
+    );
+};
+// store.subscribe(()=>{
+//     const isAuthorized = store.getState().isAuthorized;
+//     Router();
+// });
+let mapStateToProps = (state, ownProps) => {
+    console.log(state);
+    return state;
+};
+
+export default connect (
+    mapStateToProps
+)(Router);
+
+
+
+
+// export default Router;

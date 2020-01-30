@@ -17,7 +17,7 @@ class Auth extends React.Component {
                             <img src={logo} className="logo" alt="logo" />
                         </div>
                         <div className="formBox">
-                            <Signin handlerSubmit={this.HandlerSubmit} />
+                            <Signin />
                         </div>
                     </div>
                 </div>
