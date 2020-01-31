@@ -1,43 +1,59 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { login } from '../../modules/Auth/authActions';
+import { Redirect } from 'react-router-dom';
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
-// import {Context} from '../../context';
-// import PropTypes from "prop-types";
-import {store} from "../../context";
 
 class Signin extends React.Component {
     state = {
         name: '',
         password: ''
     };
-    // LoginFunc = this.context.login;
-    // SubmitFunc = this.props.handlerSubmit;
-    HandleSubmit = (e) => {
+
+    handleSubmit = (e) => {
         e.preventDefault();
-        store.dispatch({type:"LOGIN"});
+
+        this.props.login();
     };
-    HandlerInputChange = ({ name, value }) => {
+
+    handlerInputChange = ({ name, value }) => {
         this.setState({ [name]: value });
     };
+
+    handleClick = (e) => {
+        e.preventDefault();
+        const { changeForm } = this.props;
+
+        changeForm(false);
+    };
+
     render() {
-        return (
-            <form className="entryForm" onSubmit={this.HandleSubmit}>
+        const { isAuthorized } = this.props;
+
+        return isAuthorized ? (
+            <Redirect to="/map" />
+        ) : (
+            <form className="entryForm" onSubmit={this.handleSubmit}>
                 <h1>Войти</h1>
                 <p>
-                    Новый пользователь? <a href="/">Зарегистрируйтесь</a>
+                    Новый пользователь?{' '}
+                    <a href="/" onClick={this.handleClick}>
+                        Зарегистрируйтесь
+                    </a>
                 </p>
                 <div className="fieldset">
                     <Input
                         label="Имя пользователя*"
                         type="text"
                         name="name"
-                        changeHandler={this.HandlerInputChange}
+                        changeHandler={this.handlerInputChange}
                     />
                     <Input
                         label="Пароль*"
                         type="password"
                         name="password"
-                        changeHandler={this.HandlerInputChange}
+                        changeHandler={this.handlerInputChange}
                     />
                 </div>
                 <Button text="Войти" />
@@ -45,8 +61,13 @@ class Signin extends React.Component {
         );
     }
 }
-// Signin.contextType = Context;
-// Signin.propTypes = {
-//     handlerSubmit: PropTypes.func.isRequired
-// };
-export default Signin;
+
+const mapStateToProps = (state) => ({
+    isAuthorized: state.isAuthorized
+});
+
+const mapDispatchToProps = {
+    login
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signin);

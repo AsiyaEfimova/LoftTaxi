@@ -1,7 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { login } from '../../modules/Auth/authActions';
+import { Redirect } from 'react-router-dom';
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
-import PropTypes from "prop-types";
 
 class Signup extends React.Component {
     state = {
@@ -10,47 +12,56 @@ class Signup extends React.Component {
         surname: '',
         password: ''
     };
-    SubmitFunc = this.props.handlerSubmit;
-    HandleSubmit = (e) => {
+    handleSubmit = (e) => {
         e.preventDefault();
-        this.SubmitFunc();
+
+        this.props.login();
     };
-    HandlerInputChange = ({ name, value }) => {
+    handlerInputChange = ({ name, value }) => {
         this.setState({ [name]: value });
     };
+    handleClick = (e) => {
+        e.preventDefault();
+        const { changeForm } = this.props;
+
+        changeForm(true);
+    };
     render() {
-        return (
-            <form className="entryForm" onSubmit={this.HandleSubmit}>
+        const { isAuthorized } = this.props;
+        return isAuthorized ? (
+            <Redirect to="/map" />
+        ) : (
+            <form className="entryForm" onSubmit={this.handleSubmit}>
                 <h1>Регистрация</h1>
                 <p>
-                    Уже зарегистрирован? <a href="/">Войти</a>
+                    Уже зарегистрирован? <a href="/" onClick={this.handleClick}>Войти</a>
                 </p>
                 <div className="fieldset">
                     <Input
                         label="Адрес электронной почты"
                         type="text"
                         name="email"
-                        changeHandler={this.HandlerInputChange}
+                        changeHandler={this.handlerInputChange}
                     />
                     <Input
                         label="Имя"
                         type="text"
                         name="name"
                         class="half"
-                        changeHandler={this.HandlerInputChange}
+                        changeHandler={this.handlerInputChange}
                     />
                     <Input
                         label="Фамилия"
                         type="text"
                         name="surname"
                         class="half"
-                        changeHandler={this.HandlerInputChange}
+                        changeHandler={this.handlerInputChange}
                     />
                     <Input
                         label="Пароль"
                         type="password"
                         name="password"
-                        changeHandler={this.HandlerInputChange}
+                        changeHandler={this.handlerInputChange}
                     />
                 </div>
                 <Button text="Зарегистрироваться" />
@@ -58,7 +69,13 @@ class Signup extends React.Component {
         );
     }
 }
-Signup.propTypes = {
-    handlerSubmit: PropTypes.func.isRequired
+
+const mapStateToProps = (state) => ({
+    isAuthorized: state.isAuthorized
+});
+
+const mapDispatchToProps = {
+    login
 };
-export default Signup;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

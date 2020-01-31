@@ -2,13 +2,21 @@ import React from 'react';
 import logo from '../../img/logo-white.png';
 import Signup from './Signup';
 import Signin from './Signin';
-import PropTypes from 'prop-types';
 
 class Auth extends React.Component {
-    HandlerSubmit = () => {
-        this.props.routeHandler('map');
+    state = {
+        signIn: true
     };
+
+    changeForm = (state) => {
+        this.setState({
+            signIn: state
+        });
+    };
+
     render() {
+        const { signIn } = this.state;
+
         return (
             <div id="entryPage">
                 <div className="widthFix">
@@ -17,7 +25,11 @@ class Auth extends React.Component {
                             <img src={logo} className="logo" alt="logo" />
                         </div>
                         <div className="formBox">
-                            <Signin />
+                            {signIn ? (
+                                <Signin changeForm={this.changeForm} />
+                            ) : (
+                                <Signup changeForm={this.changeForm} />
+                            )}
                         </div>
                     </div>
                 </div>
@@ -25,7 +37,5 @@ class Auth extends React.Component {
         );
     }
 }
-// Auth.propTypes = {
-//     routeHandler: PropTypes.func.isRequired
-// };
+
 export default Auth;
