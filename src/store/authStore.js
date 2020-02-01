@@ -1,10 +1,12 @@
 import { createStore, compose, applyMiddleware } from 'redux';
-import { loginReducer } from '../modules/Auth/AuthReducer';
-import {authMiddleware} from '../modules/Auth/AuthMiddleware';
+import { loginReducer } from '../modules/Auth/authReducer';
+import {authMiddleware} from '../modules/Auth/authMiddleware';
 
 export const initialState = {
     isAuthorized: false,
-    token: ''
+    isLoading: false,
+    token: '',
+    error: ''
 };
 
 const createAuthStore = () => {
