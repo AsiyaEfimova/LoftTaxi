@@ -1,16 +1,21 @@
-import { createStore } from 'redux';
-import { loginReducer } from '../modules/Auth/authReducer'
+import { createStore, compose, applyMiddleware } from 'redux';
+import { loginReducer } from '../modules/Auth/AuthReducer';
+import {authMiddleware} from '../modules/Auth/AuthMiddleware';
 
-const initialState = {
-    isAuthorized: false
+export const initialState = {
+    isAuthorized: false,
+    token: ''
 };
 
 const createAuthStore = () => {
     const store = createStore(
         loginReducer,
-        window.__REDUX_DEVTOOLS_EXTENSION__
-            ? window.__REDUX_DEVTOOLS_EXTENSION__()
-            : (noop) => noop
+        compose(
+            applyMiddleware(authMiddleware),
+            window.__REDUX_DEVTOOLS_EXTENSION__
+                ? window.__REDUX_DEVTOOLS_EXTENSION__()
+                : (noop) => noop
+        )
     );
 
     return store;

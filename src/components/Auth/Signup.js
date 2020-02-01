@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { login } from '../../modules/Auth/authActions';
 import { Redirect } from 'react-router-dom';
+import { getLoginRequest } from '../../modules/Auth/authActions';
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
 
@@ -74,8 +74,8 @@ const mapStateToProps = (state) => ({
     isAuthorized: state.isAuthorized
 });
 
-const mapDispatchToProps = {
-    login
+const mapDispatchToProps = (state) => {
+    getLoginRequest(state);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

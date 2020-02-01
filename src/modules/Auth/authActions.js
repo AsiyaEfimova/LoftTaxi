@@ -1,11 +1,6 @@
-export const login = () => {
-    return {
-        type: 'LOGIN'
-    };
-};
+import {createAction} from 'redux-actions';
 
-export const logout = () => {
-    return {
-        type: 'LOGOUT'
-    };
-};
+export const getLoginRequest = createAction('GET_LOGIN_REQUEST');
+export const getLoginSuccess = createAction('GET_LOGIN_SUCCESS');
+export const getLoginFailure = createAction('GET_LOGIN_FAILURE');
+export const getLogOut = createAction('GET_LOGOUT');

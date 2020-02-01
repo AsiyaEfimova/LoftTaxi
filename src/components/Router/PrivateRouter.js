@@ -1,9 +1,10 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+// import {getLoginRequest, getLoginSuccess, getLoginFailure, getLogOut} from '../../modules/Auth';
 
-const PrivateRoute = ({ isAuthorized, component: Component, ...rest }) => {
-    console.log('PrivateRoute ==>', isAuthorized);
+const PrivateRoute = ({isAuthorized, component: Component, ...rest }) => {
+    // console.log(store);
 
     return (
         <Route
@@ -15,6 +16,21 @@ const PrivateRoute = ({ isAuthorized, component: Component, ...rest }) => {
     );
 };
 
-export default connect((state) => ({
+// const mapStateToProps = state => ({
+//     series: getSeriesImages(state),
+//     isLoading: getIsLoading(state),
+//     error: getError(state),
+// });
+// const mapDispatchToProps = { fetchSeriesRequest };
+//
+// export default connect(
+//     mapStateToProps,
+//     mapDispatchToProps,
+// )(PrivateRoute);
+
+
+const mapStateToProps = (state) => ({
     isAuthorized: state.isAuthorized
-}))(PrivateRoute);
+});
+
+export default connect(mapStateToProps)(PrivateRoute);
