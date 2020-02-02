@@ -1,27 +1,27 @@
 import {initialState} from '../../store/authStore';
 import {
-    getLoginRequest,
-    getLoginSuccess,
-    getLoginFailure,
-    getRegisterRequest,
-    getRegisterSuccess,
-    getRegisterFailure,
-    getLogOut
+    postLoginRequest,
+    postLoginSuccess,
+    postLoginFailure,
+    postRegisterRequest,
+    postRegisterSuccess,
+    postRegisterFailure,
+    postLogOut
 } from './authActions';
 
 export const loginReducer = (state = initialState, action) => {
     console.log(action.payload);
     switch (action.type) {
-        case getLoginRequest.toString():
-        case getRegisterRequest.toString():
+        case postLoginRequest.toString():
+        case postRegisterRequest.toString():
             return { ...state, isLoading: true, error: '' };
-        case getLoginSuccess.toString():
-        case getRegisterSuccess.toString():
+        case postLoginSuccess.toString():
+        case postRegisterSuccess.toString():
             return { ...state, isLoading: false, isAuthorized: action.payload.success, token: action.payload.token, error: '' };
-        case getLoginFailure.toString():
-        case getRegisterFailure.toString():
+        case postLoginFailure.toString():
+        case postRegisterFailure.toString():
             return { ...state, isLoading: false, isAuthorized: action.payload.success, token: '', error: action.payload.error };
-        case getLogOut.toString():
+        case postLogOut.toString():
             return { ...state, isLoading: false, isAuthorized: action.payload.success, token: '', error: '' };
         default:
             return state;

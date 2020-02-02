@@ -1,15 +1,15 @@
 import {
-    getLoginRequest,
-    getLoginSuccess,
-    getLoginFailure,
-    getRegisterRequest,
-    getRegisterSuccess,
-    getRegisterFailure
+    postLoginRequest,
+    postLoginSuccess,
+    postLoginFailure,
+    postRegisterRequest,
+    postRegisterSuccess,
+    postRegisterFailure
 } from './authActions';
 
 export const authMiddleware = store => next => action => {
     switch(action.type){
-        case getLoginRequest.toString():
+        case postLoginRequest.toString():
             fetch('https://loft-taxi.glitch.me/auth', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -18,14 +18,14 @@ export const authMiddleware = store => next => action => {
             .then(response => response.json())
             .then(response => {
                 (response.success) ?
-                    store.dispatch(getLoginSuccess(response)):
-                    store.dispatch(getLoginFailure(response));
+                    store.dispatch(postLoginSuccess(response)):
+                    store.dispatch(postLoginFailure(response));
             })
             .catch(error => {
-                store.dispatch(getLoginFailure(error));
+                store.dispatch(postLoginFailure(error));
             });
             break;
-        case getRegisterRequest.toString():
+        case postRegisterRequest.toString():
             fetch('https://loft-taxi.glitch.me/register', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -34,11 +34,11 @@ export const authMiddleware = store => next => action => {
                 .then(response => response.json())
                 .then(response => {
                     (response.success) ?
-                        store.dispatch(getRegisterSuccess(response)):
-                        store.dispatch(getRegisterFailure(response));
+                        store.dispatch(postRegisterSuccess(response)):
+                        store.dispatch(postRegisterFailure(response));
                 })
                 .catch(error => {
-                    store.dispatch(getRegisterFailure(error));
+                    store.dispatch(postRegisterFailure(error));
                 });
             break;
         default: break;

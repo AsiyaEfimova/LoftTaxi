@@ -2,7 +2,6 @@ import React from 'react';
 import Header from '../Header';
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
-import PropTypes from "prop-types";
 import mapboxgl from 'mapbox-gl';
 mapboxgl.accessToken = 'pk.eyJ1IjoiZWZpbW92YWFzaXlhIiwiYSI6ImNrNXJ3azVmaTBna3ozZW1sZ3lmNTJnMTgifQ.K6Q-q93TYcDSl9R1KSHWRA';
 
@@ -23,7 +22,7 @@ class Map extends React.Component {
     render() {
         return (
             <>
-                <Header routeHandler={this.props.routeHandler} />
+                <Header />
                 <div id="page">
                     <div id="mapBox" ref={this.mapContainer}></div>
                     <div className="widthFix">
@@ -49,7 +48,4 @@ class Map extends React.Component {
         );
     }
 }
-// Map.propTypes = {
-//     routeHandler: PropTypes.func.isRequired
-// };
 export default Map;

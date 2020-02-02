@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import {getRegisterRequest} from '../../modules/Auth/authActions';
+import {postRegisterRequest} from '../../modules/Auth/authActions';
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
 
@@ -14,8 +14,8 @@ class Signup extends React.Component {
     };
     handleSubmit = (e) => {
         e.preventDefault();
-        const {getRegisterRequest} = this.props;
-        getRegisterRequest(this.state);
+        const {postRegisterRequest} = this.props;
+        postRegisterRequest(this.state);
     };
     handlerInputChange = ({ name, value }) => {
         this.setState({ [name]: value });
@@ -73,18 +73,7 @@ class Signup extends React.Component {
 const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = {
-    getRegisterRequest
+    postRegisterRequest
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);
-
-
-// const mapStateToProps = (state) => ({
-//     isAuthorized: state.isAuthorized
-// });
-//
-// const mapDispatchToProps = (state) => {
-//     getLoginRequest(state);
-// };
-//
-// export default connect(mapStateToProps, mapDispatchToProps)(Signup);

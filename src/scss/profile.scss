@@ -15,44 +15,19 @@
         background: $white;
         border-radius: 10px;
         box-shadow: 0 6px 20px rgba(0,0,0,.15);
-        padding: 30px;
+        padding: 40px 30px 0 30px;
+        position: relative;
+        .cardIco {
+            width: 40px;
+            height: 25px;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background: url(../img/icons.png) 0 -40px no-repeat;
+        }
     }
     .input {
         margin: 0 0 30px 0;
     }
+    .toolTip {}
 }
-
-
-
-
-
-/*
-    <fieldset>
-        <div className="cardIco"></div>
-        <Input
-            label="Номер карты:"
-            type="text"
-            name="cardNumber"
-        />
-        <Input
-            label="Срок действия:"
-            type="text"
-            name="cardValid"
-        />
-    </fieldset>
-    <fieldset>
-        <Input
-            label="Номер карты:"
-            type="text"
-            name="cardNumber"
-        />
-        <Input
-            label="Срок действия:"
-            type="text"
-            name="cardValid"
-        />
-    </fieldset>
-    <Button text="Сохранить" />
-    <div children="toolTip"></div>
-</form>
-*/

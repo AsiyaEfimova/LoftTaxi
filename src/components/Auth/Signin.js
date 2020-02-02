@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { getLoginRequest } from '../../modules/Auth/authActions';
+import { postLoginRequest } from '../../modules/Auth/authActions';
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
 
@@ -13,8 +13,8 @@ class Signin extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const {getLoginRequest} = this.props;
-        getLoginRequest(this.state);
+        const {postLoginRequest} = this.props;
+        postLoginRequest(this.state);
     };
 
     handlerInputChange = ({ name, value }) => {
@@ -65,7 +65,7 @@ class Signin extends React.Component {
 const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = {
-    getLoginRequest
+    postLoginRequest
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signin);

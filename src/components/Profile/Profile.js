@@ -1,17 +1,37 @@
 import React from 'react';
 import Header from '../Header';
+import {connect} from "react-redux";
+import {postCardRequest} from "../../modules/Profile/profileActions";
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
-import PropTypes from "prop-types";
 
 class Profile extends React.Component {
+    state = {
+        cardNumber: '',
+        expiryDate: '',
+        cardName: '',
+        cvc: ''
+    };
+    componentDidMount() {
+        const {getCardRequest} = this.props;
+        getCardRequest();
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const {postCardRequest} = this.props;
+        postCardRequest(this.state);
+    };
+    handlerInputChange = ({ name, value }) => {
+        this.setState({ [name]: value });
+    };
     render() {
         return (
             <>
-                <Header routeHandler={this.props.routeHandler} />
+                <Header />
                 <div id="page">
                     <div className="widthFix">
-                        <form className="paymentForm">
+                        <form className="paymentForm" onSubmit={this.handleSubmit}>
                             <h1>
                                 Профиль
                                 <small>Способ оплаты</small>
@@ -23,23 +43,27 @@ class Profile extends React.Component {
                                         label="Номер карты:"
                                         type="text"
                                         name="cardNumber"
+                                        changeHandler={this.handlerInputChange}
                                     />
                                     <Input
                                         label="Срок действия:"
                                         type="text"
-                                        name="cardValid"
+                                        name="expiryDate"
+                                        changeHandler={this.handlerInputChange}
                                     />
                                 </fieldset>
                                 <fieldset className="card">
                                     <Input
-                                        label="Номер карты:"
+                                        label="Имя владельца:"
                                         type="text"
-                                        name="cardNumber"
+                                        name="cardName"
+                                        changeHandler={this.handlerInputChange}
                                     />
                                     <Input
-                                        label="Срок действия:"
-                                        type="text"
-                                        name="cardValid"
+                                        label="CVC:"
+                                        type="password"
+                                        name="cvc"
+                                        changeHandler={this.handlerInputChange}
                                     />
                                 </fieldset>
                             </div>
@@ -52,7 +76,11 @@ class Profile extends React.Component {
         );
     }
 }
-// Profile.propTypes = {
-//     routeHandler: PropTypes.func.isRequired
-// };
-export default Profile;
+
+const mapStateToProps = (state) => state;
+
+const mapDispatchToProps = {
+    postCardRequest
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

@@ -2,13 +2,13 @@ import React from 'react';
 import logo from '../../img/logo.png';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getLogOut } from '../../modules/Auth/authActions';
+import { postLogOut } from '../../modules/Auth/authActions';
 
 const Header = () => {
     const handleCkick = (e) => {
         e.preventDefault();
 
-        getLogOut();
+        postLogOut();
     };
 
     return (
@@ -33,4 +33,4 @@ const Header = () => {
     );
 };
 
-export default connect(null, getLogOut())(Header);
+export default connect(null, postLogOut())(Header);
