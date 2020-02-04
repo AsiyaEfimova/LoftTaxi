@@ -7,27 +7,31 @@ import Input from '../../elements/Input';
 import Button from '../../elements/Button';
 
 class Profile extends React.Component {
-    state = {
-        token: '',
-        cardNumber: '',
-        expiryDate: '',
-        cardName: '',
-        cvc: ''
-    };
-    componentDidMount() {
+    constructor(props) {
+        super(props);
         let userInfo = this.props.loginReducer;
-        let cardInfo = this.props.getCardReducer;
-
-        this.setState({ token: userInfo.token });
-        console.log(this.state);
-
-
+        this.state = {
+            token: userInfo.token,
+            cardNumber: '',
+            expiryDate: '',
+            cardName: '',
+            cvc: ''
+        };
         const {getCardRequest} = this.props;
         getCardRequest(this.state);
     }
+    componentDidMount() {
+        let cardInfo = this.props.getCardReducer;
+    }
     componentDidUpdate(prevProps, prevState, snapshot) {
-
-        console.log(this.props);
+        let newState = this.props.getCardReducer;
+        console.log(prevState,newState);
+        // this.setState({
+        //     cardNumber: newState.cardNumber,
+        //     expiryDate: newState.expiryDate,
+        //     cardName: newState.cardName,
+        //     cvc: newState.cvc
+        // });
     }
 
     handleSubmit = (e) => {
@@ -56,12 +60,14 @@ class Profile extends React.Component {
                                         label="Номер карты:"
                                         type="text"
                                         name="cardNumber"
+                                        value={this.props.getCardReducer.cardNumber}
                                         changeHandler={this.handlerInputChange}
                                     />
                                     <Input
                                         label="Срок действия:"
                                         type="text"
                                         name="expiryDate"
+                                        value={this.props.getCardReducer.expiryDate}
                                         changeHandler={this.handlerInputChange}
                                     />
                                 </fieldset>
@@ -70,12 +76,14 @@ class Profile extends React.Component {
                                         label="Имя владельца:"
                                         type="text"
                                         name="cardName"
+                                        value={this.props.getCardReducer.cardName}
                                         changeHandler={this.handlerInputChange}
                                     />
                                     <Input
                                         label="CVC:"
                                         type="password"
                                         name="cvc"
+                                        value={this.props.getCardReducer.cvc}
                                         changeHandler={this.handlerInputChange}
                                     />
                                 </fieldset>

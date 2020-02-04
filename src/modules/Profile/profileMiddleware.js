@@ -23,15 +23,15 @@ export const profileMiddleware = store => next => action => {
             break;
         case getCardRequest.toString():
             console.log(action.payload);
-            fetch(`https://loft-taxi.glitch.me/card?token=${action.payload}`, {
+            fetch(`https://loft-taxi.glitch.me/card?token=${action.payload.token}`, {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'}
             })
                 .then(response => response.json())
                 .then(response => {
-                    (response.success) ?
-                        store.dispatch(getCardSuccess(response)):
-                        store.dispatch(getCardFailure(response));
+                    // (response.success) ?
+                        store.dispatch(getCardSuccess(response))//:
+                        // store.dispatch(getCardFailure(response));
                 })
                 .catch(error => {
                     store.dispatch(getCardFailure(error));
