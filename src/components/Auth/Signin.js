@@ -29,8 +29,8 @@ class Signin extends React.Component {
     };
 
     render() {
+        console.log(this.props);
         const { isAuthorized } = this.props;
-
         return isAuthorized ? (
             <Redirect to="/map" />
         ) : (
@@ -62,7 +62,7 @@ class Signin extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = (state) => state.loginReducer;
 
 const mapDispatchToProps = {
     postLoginRequest

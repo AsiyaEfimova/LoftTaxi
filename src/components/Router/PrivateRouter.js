@@ -2,7 +2,8 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const PrivateRoute = ({isAuthorized, component: Component, ...rest }) => {
+const PrivateRoute = ({privateState, component: Component, ...rest }) => {
+    let isAuthorized = privateState.loginReducer.isAuthorized;
     console.log(isAuthorized);
     return (
         <Route
@@ -15,7 +16,7 @@ const PrivateRoute = ({isAuthorized, component: Component, ...rest }) => {
 };
 
 const mapStateToProps = (state) => ({
-    isAuthorized: state.isAuthorized
+    privateState: state
 });
 
 export default connect(mapStateToProps)(PrivateRoute);

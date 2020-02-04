@@ -2,19 +2,32 @@ import React from 'react';
 import Header from '../Header';
 import {connect} from "react-redux";
 import {postCardRequest} from "../../modules/Profile/profileActions";
+import {getCardRequest} from "../../modules/Profile/profileActions";
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
 
 class Profile extends React.Component {
     state = {
+        token: '',
         cardNumber: '',
         expiryDate: '',
         cardName: '',
         cvc: ''
     };
     componentDidMount() {
+        let userInfo = this.props.loginReducer;
+        let cardInfo = this.props.getCardReducer;
+
+        this.setState({ token: userInfo.token });
+        console.log(this.state);
+
+
         const {getCardRequest} = this.props;
-        getCardRequest();
+        getCardRequest(this.state);
+    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+
+        console.log(this.props);
     }
 
     handleSubmit = (e) => {
@@ -77,10 +90,14 @@ class Profile extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = (state) => {
+    console.log(state);
+    return state;
+};
 
 const mapDispatchToProps = {
-    postCardRequest
+    postCardRequest,
+    getCardRequest
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

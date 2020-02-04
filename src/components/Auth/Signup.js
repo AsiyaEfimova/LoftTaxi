@@ -70,7 +70,7 @@ class Signup extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = (state) => state.loginReducer;
 
 const mapDispatchToProps = {
     postRegisterRequest
