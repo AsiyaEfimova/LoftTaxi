@@ -20,20 +20,6 @@ class Profile extends React.Component {
         const {getCardRequest} = this.props;
         getCardRequest(this.state);
     }
-    componentDidMount() {
-        let cardInfo = this.props.getCardReducer;
-    }
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        let newState = this.props.getCardReducer;
-        console.log(prevState,newState);
-        // this.setState({
-        //     cardNumber: newState.cardNumber,
-        //     expiryDate: newState.expiryDate,
-        //     cardName: newState.cardName,
-        //     cvc: newState.cvc
-        // });
-    }
-
     handleSubmit = (e) => {
         e.preventDefault();
         const {postCardRequest} = this.props;
