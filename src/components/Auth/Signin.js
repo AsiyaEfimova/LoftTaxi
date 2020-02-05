@@ -29,7 +29,6 @@ class Signin extends React.Component {
     };
 
     render() {
-        console.log(this.props);
         const { isAuthorized } = this.props;
         return isAuthorized ? (
             <Redirect to="/map" />

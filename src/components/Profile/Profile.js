@@ -46,14 +46,14 @@ class Profile extends React.Component {
                                         label="Номер карты:"
                                         type="text"
                                         name="cardNumber"
-                                        value={this.props.getCardReducer.cardNumber}
+                                        value={this.props.cardReducer.cardNumber}
                                         changeHandler={this.handlerInputChange}
                                     />
                                     <Input
                                         label="Срок действия:"
                                         type="text"
                                         name="expiryDate"
-                                        value={this.props.getCardReducer.expiryDate}
+                                        value={this.props.cardReducer.expiryDate}
                                         changeHandler={this.handlerInputChange}
                                     />
                                 </fieldset>
@@ -62,14 +62,14 @@ class Profile extends React.Component {
                                         label="Имя владельца:"
                                         type="text"
                                         name="cardName"
-                                        value={this.props.getCardReducer.cardName}
+                                        value={this.props.cardReducer.cardName}
                                         changeHandler={this.handlerInputChange}
                                     />
                                     <Input
                                         label="CVC:"
                                         type="password"
                                         name="cvc"
-                                        value={this.props.getCardReducer.cvc}
+                                        value={this.props.cardReducer.cvc}
                                         changeHandler={this.handlerInputChange}
                                     />
                                 </fieldset>
@@ -85,7 +85,6 @@ class Profile extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return state;
 };
 

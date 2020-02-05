@@ -3,7 +3,6 @@ import {
 } from './profileActions';
 
 export const profileMiddleware = store => next => action => {
-    console.log(store);
     switch(action.type){
         case postCardRequest.toString():
             fetch('https://loft-taxi.glitch.me/card', {
@@ -22,7 +21,6 @@ export const profileMiddleware = store => next => action => {
                 });
             break;
         case getCardRequest.toString():
-            console.log(action.payload);
             fetch(`https://loft-taxi.glitch.me/card?token=${action.payload.token}`, {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'}

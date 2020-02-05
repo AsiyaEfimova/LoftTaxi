@@ -1,22 +1,8 @@
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import { loginReducer } from '../modules/Auth/authReducer';
-import { postCardReducer } from '../modules/Profile/profileReducer';
-import { getCardReducer } from '../modules/Profile/profileReducer';
+import { cardReducer } from '../modules/Profile/profileReducer';
 import {authMiddleware} from '../modules/Auth/authMiddleware';
 import {profileMiddleware} from '../modules/Profile/profileMiddleware';
-import {authState} from '../modules/Auth/authReducer';
-import {cardState} from '../modules/Profile/profileReducer';
-
-// export const initialState = {
-//     isAuthorized: false,
-//     isLoading: false,
-//     error: ''
-// };
-
-// export const appStore = {
-//     auth: authState,
-//     profile: cardState
-// };
 
 export const initialState = {
     loginReducer: {
@@ -25,16 +11,7 @@ export const initialState = {
         error: '',
         token: ''
     },
-    postCardReducer: {
-        isLoading: false,
-        hasCard: false,
-        token: '',
-        cardNumber: '',
-        expiryDate: '',
-        cardName: '',
-        cvc: ''
-    },
-    getCardReducer: {
+    cardReducer: {
         isLoading: false,
         hasCard: false,
         token: '',
@@ -47,13 +24,11 @@ export const initialState = {
 
 const reducers = combineReducers({
     loginReducer,
-    postCardReducer,
-    getCardReducer
+    cardReducer
 });
 
 const createAuthStore = () => {
     const store = createStore(
-        // loginReducer,
         reducers,
         initialState,
         compose(
