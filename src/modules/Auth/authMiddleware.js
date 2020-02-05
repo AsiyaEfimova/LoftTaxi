@@ -6,6 +6,7 @@ import {
     postRegisterSuccess,
     postRegisterFailure
 } from './authActions';
+import {setItems, removeItems} from '../../services/localSrorage';
 
 export const authMiddleware = store => next => action => {
     switch(action.type){
@@ -17,12 +18,21 @@ export const authMiddleware = store => next => action => {
             })
             .then(response => response.json())
             .then(response => {
-                (response.success) ?
-                    store.dispatch(postLoginSuccess(response)):
+                if(response.success) {
+                    store.dispatch(postLoginSuccess(response));
+                    setItems('user', {
+                        email: action.payload.email,
+                        password: action.payload.password,
+                        token: response.token
+                    });
+                }else{
                     store.dispatch(postLoginFailure(response));
+                    removeItems('user');
+                }
             })
             .catch(error => {
                 store.dispatch(postLoginFailure(error));
+                removeItems('user');
             });
             break;
         case postRegisterRequest.toString():
@@ -33,12 +43,23 @@ export const authMiddleware = store => next => action => {
             })
                 .then(response => response.json())
                 .then(response => {
-                    (response.success) ?
-                        store.dispatch(postRegisterSuccess(response)):
+                    if(response.success) {
+                        store.dispatch(postRegisterSuccess(response));
+                        setItems('user', {
+                            email: action.payload.email,
+                            password: action.payload.password,
+                            name: action.payload.name,
+                            surname: action.payload.surname,
+                            token: response.token
+                        });
+                    }else{
                         store.dispatch(postRegisterFailure(response));
+                        removeItems('user');
+                    }
                 })
                 .catch(error => {
                     store.dispatch(postRegisterFailure(error));
+                    removeItems('user');
                 });
             break;
         default: break;

@@ -1,16 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { postLoginRequest } from '../../modules/Auth/authActions';
+import { postLoginRequest, postLoginSuccess } from '../../modules/Auth/authActions';
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
+import {setItems, getItems, removeItems} from '../../services/localSrorage';
 
 class Signin extends React.Component {
     state = {
         email: '',
         password: ''
     };
-
+    componentDidMount() {
+        let savedInfo = getItems('user');
+        if(savedInfo!==null) {
+            const {postLoginSuccess} = this.props;
+            postLoginSuccess({success: true, token: savedInfo.token});
+        }
+    }
     handleSubmit = (e) => {
         e.preventDefault();
         const {postLoginRequest} = this.props;
@@ -64,7 +71,8 @@ class Signin extends React.Component {
 const mapStateToProps = (state) => state.loginReducer;
 
 const mapDispatchToProps = {
-    postLoginRequest
+    postLoginRequest,
+    postLoginSuccess
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signin);

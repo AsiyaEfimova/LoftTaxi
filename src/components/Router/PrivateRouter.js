@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 const PrivateRoute = ({privateState, component: Component, ...rest }) => {
     let isAuthorized = privateState.loginReducer.isAuthorized;
-    console.log(isAuthorized);
     return (
         <Route
             {...rest}

@@ -2,13 +2,15 @@ import React from 'react';
 import logo from '../../img/logo.png';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { postLogOut } from '../../modules/Auth/authActions';
+import {postLogOut} from '../../modules/Auth/authActions';
+import {removeItems} from '../../services/localSrorage';
 
-const Header = () => {
+const Header = (props) => {
     const handleCkick = (e) => {
         e.preventDefault();
-
-        postLogOut();
+        removeItems('user');
+        const {postLogOut} = props;
+        postLogOut({success: false, error: ''});
     };
 
     return (
@@ -33,4 +35,10 @@ const Header = () => {
     );
 };
 
-export default connect(null, postLogOut())(Header);
+const mapStateToProps = (state) => state.loginReducer;
+
+const mapDispatchToProps = {
+    postLogOut
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
