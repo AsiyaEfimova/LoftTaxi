@@ -26,6 +26,7 @@ class Profile extends React.Component {
         postCardRequest(this.state);
     };
     handlerInputChange = ({ name, value }) => {
+        console.log(name, value);
         this.setState({ [name]: value });
     };
     render() {

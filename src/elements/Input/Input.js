@@ -4,7 +4,14 @@ const Input = (props) => {
     let className;
     props.class ? (className = ' ' + props.class) : (className = '');
     const ChangeHandler = (e) => {
-        props.changeHandler({ name: props.name, value: e.target.value });
+        if(props.changeHandler) {
+            props.changeHandler({name: props.name, value: e.target.value});
+        }
+    };
+    const FocusHandler = (e)=>{
+        if(props.focusHandler){
+            props.focusHandler(e.target);
+        }
     };
     return (
         <div className={'input' + className}>
@@ -14,6 +21,7 @@ const Input = (props) => {
                 name={props.name}
                 value={props.value}
                 onChange={ChangeHandler}
+                onFocus={FocusHandler}
             />
         </div>
     );

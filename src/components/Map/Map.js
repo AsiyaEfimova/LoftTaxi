@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../Header';
-import Input from '../../elements/Input';
+import InputAutocomplete from '../../elements/InputAutocomplete';
 import Button from '../../elements/Button';
 import mapboxgl from 'mapbox-gl';
 mapboxgl.accessToken = 'pk.eyJ1IjoiZWZpbW92YWFzaXlhIiwiYSI6ImNrNXJ3azVmaTBna3ozZW1sZ3lmNTJnMTgifQ.K6Q-q93TYcDSl9R1KSHWRA';
@@ -19,6 +19,9 @@ class Map extends React.Component {
     componentWillUnmount() {
         this.map.remove();
     }
+    HandlerInputChange = () => {
+        console.log(1);
+    };
     render() {
         return (
             <>
@@ -28,17 +31,17 @@ class Map extends React.Component {
                     <div className="widthFix">
                         <form className="routeForm">
                             <div className="routeLine"></div>
-                            <Input
+                            <InputAutocomplete
                                 label="Откуда"
                                 type="text"
                                 name="from"
-                                // changeHandler={this.HandlerInputChange}
+                                changeHandler={this.HandlerInputChange}
                             />
-                            <Input
+                            <InputAutocomplete
                                 label="Куда"
                                 type="text"
                                 name="to"
-                                // changeHandler={this.HandlerInputChange}
+                                changeHandler={this.HandlerInputChange}
                             />
                             <Button text="Вызвать такси" />
                         </form>
