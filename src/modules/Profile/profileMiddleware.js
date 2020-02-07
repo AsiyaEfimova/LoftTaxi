@@ -21,7 +21,7 @@ export const profileMiddleware = store => next => action => {
                 });
             break;
         case getCardRequest.toString():
-            fetch(`https://loft-taxi.glitch.me/card?token=${action.payload.token}`, {
+            fetch(`https://loft-taxi.glitch.me/card?token=${action.payload}`, {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'}
             })

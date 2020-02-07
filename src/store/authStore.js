@@ -14,7 +14,6 @@ export const initialState = {
     cardReducer: {
         isLoading: false,
         hasCard: false,
-        token: '',
         cardNumber: '',
         expiryDate: '',
         cardName: '',

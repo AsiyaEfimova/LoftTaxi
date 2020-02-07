@@ -2,16 +2,16 @@ import React from 'react';
 import Input from '../../elements/Input';
 
 const InputAutocomplete = (props) => {
-    let className;
-    // props.class ? (className = ' ' + props.class) : (className = '');
     const ChangeHandler = (e) => {
-        console.log(12);
+        console.log('ChangeHandler');
         // props.changeHandler({ name: props.name, value: e.target.value });
     };
-    const openList = (element)=>{
-        console.log(element);
+    const openList = () => {
+        console.log('openList');
     };
-    const closeList = ()=>{};
+    const closeList = ()=>{
+        console.log('closeList');
+    };
     return (
         <div className="autoCompleteBox">
             <Input

@@ -7,18 +7,28 @@ import Input from '../../elements/Input';
 import Button from '../../elements/Button';
 
 class Profile extends React.Component {
-    constructor(props) {
-        super(props);
-        let userInfo = this.props.loginReducer;
-        this.state = {
-            token: userInfo.token,
-            cardNumber: '',
-            expiryDate: '',
-            cardName: '',
-            cvc: ''
-        };
+    state = {
+        token: '',
+        cardNumber: '',
+        expiryDate: '',
+        cardName: '',
+        cvc: ''
+    };
+    componentDidMount() {
+        this.setState({token: this.props.token});
         const {getCardRequest} = this.props;
-        getCardRequest(this.state);
+        getCardRequest(this.props.token);
+    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        let {cardInfo} = this.props;
+        if(cardInfo!== prevProps.cardInfo){
+            this.setState({
+                cardNumber: cardInfo.cardNumber,
+                expiryDate: cardInfo.expiryDate,
+                cardName: cardInfo.cardName,
+                cvc: cardInfo.cvc
+            });
+        }
     }
     handleSubmit = (e) => {
         e.preventDefault();
@@ -26,10 +36,10 @@ class Profile extends React.Component {
         postCardRequest(this.state);
     };
     handlerInputChange = ({ name, value }) => {
-        console.log(name, value);
         this.setState({ [name]: value });
     };
     render() {
+        const {cardNumber, expiryDate, cardName, cvc} = this.state;
         return (
             <>
                 <Header />
@@ -47,14 +57,14 @@ class Profile extends React.Component {
                                         label="Номер карты:"
                                         type="text"
                                         name="cardNumber"
-                                        value={this.props.cardReducer.cardNumber}
+                                        value={cardNumber}
                                         changeHandler={this.handlerInputChange}
                                     />
                                     <Input
                                         label="Срок действия:"
                                         type="text"
                                         name="expiryDate"
-                                        value={this.props.cardReducer.expiryDate}
+                                        value={expiryDate}
                                         changeHandler={this.handlerInputChange}
                                     />
                                 </fieldset>
@@ -63,14 +73,14 @@ class Profile extends React.Component {
                                         label="Имя владельца:"
                                         type="text"
                                         name="cardName"
-                                        value={this.props.cardReducer.cardName}
+                                        value={cardName}
                                         changeHandler={this.handlerInputChange}
                                     />
                                     <Input
                                         label="CVC:"
                                         type="password"
                                         name="cvc"
-                                        value={this.props.cardReducer.cvc}
+                                        value={cvc}
                                         changeHandler={this.handlerInputChange}
                                     />
                                 </fieldset>
@@ -85,9 +95,10 @@ class Profile extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return state;
-};
+const mapStateToProps = (state) => ({
+    token: state.loginReducer.token,
+    cardInfo: state.cardReducer
+});
 
 const mapDispatchToProps = {
     postCardRequest,
