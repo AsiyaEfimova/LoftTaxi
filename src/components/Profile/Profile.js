@@ -1,8 +1,7 @@
 import React from 'react';
 import Header from '../Header';
 import {connect} from "react-redux";
-import {postCardRequest} from "../../modules/Profile/profileActions";
-import {getCardRequest} from "../../modules/Profile/profileActions";
+import {postCardRequest, getCardRequest} from "../../modules/Profile/profileActions";
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
 
@@ -19,15 +18,9 @@ class Profile extends React.Component {
         const {getCardRequest} = this.props;
         getCardRequest(this.props.token);
     }
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        let {cardInfo} = this.props;
-        if(cardInfo!== prevProps.cardInfo){
-            this.setState({
-                cardNumber: cardInfo.cardNumber,
-                expiryDate: cardInfo.expiryDate,
-                cardName: cardInfo.cardName,
-                cvc: cardInfo.cvc
-            });
+    componentDidUpdate(prevProps, prevState) {
+        if(this.props !== prevProps){
+            this.setState(this.props);
         }
     }
     handleSubmit = (e) => {
@@ -39,7 +32,7 @@ class Profile extends React.Component {
         this.setState({ [name]: value });
     };
     render() {
-        const {cardNumber, expiryDate, cardName, cvc} = this.state;
+        const {cardNumber,expiryDate,cardName,cvc} = this.state;
         return (
             <>
                 <Header />
@@ -97,7 +90,10 @@ class Profile extends React.Component {
 
 const mapStateToProps = (state) => ({
     token: state.loginReducer.token,
-    cardInfo: state.cardReducer
+    cardNumber: state.cardReducer.cardNumber,
+    expiryDate: state.cardReducer.expiryDate,
+    cardName: state.cardReducer.cardName,
+    cvc: state.cardReducer.cvc
 });
 
 const mapDispatchToProps = {

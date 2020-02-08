@@ -27,7 +27,7 @@ export const profileMiddleware = store => next => action => {
             })
                 .then(response => response.json())
                 .then(response => {
-                        store.dispatch(getCardSuccess(response))
+                    store.dispatch(getCardSuccess(response))
                 })
                 .catch(error => {
                     store.dispatch(getCardFailure(error));

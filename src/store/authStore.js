@@ -1,8 +1,11 @@
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import { loginReducer } from '../modules/Auth/authReducer';
 import { cardReducer } from '../modules/Profile/profileReducer';
-import {authMiddleware} from '../modules/Auth/authMiddleware';
 import {profileMiddleware} from '../modules/Profile/profileMiddleware';
+import createSagaMiddleWare from 'redux-saga';
+import { rootSaga } from './rootSaga';
+
+const sagaMiddleware = createSagaMiddleWare();
 
 export const initialState = {
     loginReducer: {
@@ -31,13 +34,15 @@ const createAuthStore = () => {
         reducers,
         initialState,
         compose(
-            applyMiddleware(authMiddleware),
+            applyMiddleware(sagaMiddleware),
             applyMiddleware(profileMiddleware),
             window.__REDUX_DEVTOOLS_EXTENSION__
                 ? window.__REDUX_DEVTOOLS_EXTENSION__()
                 : (noop) => noop
         )
     );
+
+    sagaMiddleware.run(rootSaga);
 
     return store;
 };
