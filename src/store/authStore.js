@@ -1,7 +1,8 @@
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import { loginReducer } from '../modules/Auth/authReducer';
 import { cardReducer } from '../modules/Profile/profileReducer';
-import {profileMiddleware} from '../modules/Profile/profileMiddleware';
+// import {profileMiddleware} from '../modules/Profile/profileMiddleware';
+import {addressesReducer} from '../modules/Addresses/addressReducer';
 import createSagaMiddleWare from 'redux-saga';
 import { rootSaga } from './rootSaga';
 
@@ -21,12 +22,18 @@ export const initialState = {
         expiryDate: '',
         cardName: '',
         cvc: ''
+    },
+    addressesReducer: {
+        error: '',
+        isLoading: false,
+        addresses: []
     }
 };
 
 const reducers = combineReducers({
     loginReducer,
-    cardReducer
+    cardReducer,
+    addressesReducer
 });
 
 const createAuthStore = () => {
@@ -35,7 +42,7 @@ const createAuthStore = () => {
         initialState,
         compose(
             applyMiddleware(sagaMiddleware),
-            applyMiddleware(profileMiddleware),
+            // applyMiddleware(profileMiddleware),
             window.__REDUX_DEVTOOLS_EXTENSION__
                 ? window.__REDUX_DEVTOOLS_EXTENSION__()
                 : (noop) => noop

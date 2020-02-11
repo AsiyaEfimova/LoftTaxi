@@ -28,3 +28,17 @@ export const fetchCard = token =>
         headers: {'Content-Type': 'application/json'}
     })
         .then(response => response.json());
+
+export const fetchAddressList = ()=>
+    fetch('https://loft-taxi.glitch.me/addressList', {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'}
+    })
+        .then(response => response.json());
+
+export const fetchRoute = (address1, address2)=>
+    fetch(`https://loft-taxi.glitch.me/route?address1=${address1}&address2=${address2}`, {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'}
+    })
+        .then(response => response.json());
