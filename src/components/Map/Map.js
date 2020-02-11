@@ -1,6 +1,8 @@
 import React from 'react';
-import {connect, useSelector } from 'react-redux';
-import {fetchAddressesRequest, fetchAddressesSuccess, fetchAddressesFailure} from '../../modules/Addresses/addressActions';
+import {connect } from 'react-redux';
+import {fetchAddressesRequest} from '../../modules/Addresses/addressActions';
+import {fetchRouteRequest} from '../../modules/Routes';
+import {drawRoute} from './DrawRoute'
 import Header from '../Header';
 import OrderForm from '../OrderForm';
 import mapboxgl from 'mapbox-gl';
@@ -10,24 +12,25 @@ class Map extends React.Component {
     map = null;
     mapContainer = React.createRef();
     componentDidMount() {
-        // console.log(this.props.addresses);
         this.map = new mapboxgl.Map({
             container: this.mapContainer.current,
             style: 'mapbox://styles/mapbox/streets-v9',
-            zoom: 10,
-            center: [37.622504,55.753215]
+            zoom: 8,
+            center: [30.27,60]
         });
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         console.log(this.props.addresses);
+        if (this.map.getLayer('route')) {
+            this.map.removeLayer('route');
+            this.map.removeSource('route');
+        }
+        drawRoute(this.map, this.props.coords);
     }
 
     componentWillUnmount() {
         this.map.remove();
     }
-    HandlerInputChange = () => {
-        console.log(1);
-    };
     render() {
         return (
             <>
@@ -44,13 +47,13 @@ class Map extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    addresses: state.addressesReducer.addresses
+    addresses: state.addressesReducer.addresses,
+    coords: state.routeReducer.coords
 });
 
 const mapDispatchToProps = {
     fetchAddressesRequest,
-    fetchAddressesSuccess,
-    fetchAddressesFailure
+    fetchRouteRequest
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Map);

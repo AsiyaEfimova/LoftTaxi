@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect } from 'react-redux';
-import {fetchAddressesRequest, fetchAddressesSuccess, fetchAddressesFailure} from '../../modules/Addresses/addressActions';
+import {fetchAddressesRequest} from '../../modules/Addresses/addressActions';
+import {fetchRouteRequest} from '../../modules/Routes';
 import InputAutocomplete from '../../elements/InputAutocomplete';
 import Button from '../../elements/Button';
 
@@ -21,11 +22,12 @@ class OrderForm extends React.Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        // const {postCardRequest} = this.props;
-        // postCardRequest(this.state);
+        const {fetchRouteRequest} = this.props;
+        fetchRouteRequest({addressFrom: this.state.addressFrom, addressTo: this.state.addressTo});
     };
-    handlerInputChange = ({ name, value }) => {
-        this.setState({ [name]: value });
+    handlerInputChange = (inputData) => {
+        console.log(inputData);
+        this.setState(inputData);
     };
     render() {
         const {addressesList, addressFrom, addressTo} = this.state;
@@ -67,8 +69,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
     fetchAddressesRequest,
-    fetchAddressesSuccess,
-    fetchAddressesFailure
+    fetchRouteRequest
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderForm);
