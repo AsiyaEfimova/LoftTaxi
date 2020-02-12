@@ -42,6 +42,7 @@ const InputAutocomplete = (props) => {
                 type="text"
                 name={props.name}
                 value={props.value}
+                autoComplete={'off'}
                 focusHandler={openList}
                 changeHandler={changeHandler}
             />

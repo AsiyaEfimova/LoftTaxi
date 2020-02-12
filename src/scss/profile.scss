@@ -1,10 +1,12 @@
-.paymentForm {
+.profileBlock {
     max-width: 950px;
     margin: 80px auto;
     background: $white;
     border-radius: 3px;
     padding: 60px 70px;
     text-align: center;
+}
+.paymentForm {
     .fieldSet {
         margin: 0 -15px 45px -15px;
         display: flex;

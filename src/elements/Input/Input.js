@@ -18,7 +18,7 @@ const Input = (props) => {
         <div className={'input' + className}>
             <label>{props.label}</label>
             <input
-                autoComplete="off"
+                autoComplete={props.autoComplete}
                 type={props.type}
                 name={props.name}
                 value={props.value}

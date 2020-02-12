@@ -12,7 +12,7 @@ export const cardReducer = (state = initialState.cardReducer, action) => {
         case getCardRequest.toString():
             return { ...state, isLoading: true, error: '' };
         case getCardSuccess.toString():
-            return { ...state, isLoading: false, hasCard: true, cardNumber: action.payload.cardNumber, expiryDate: action.payload.expiryDate, cardName: action.payload.cardName, cvc: action.payload.cvc, error: '' };
+            return { ...state, isLoading: false, cardNumber: action.payload.cardNumber, expiryDate: action.payload.expiryDate, cardName: action.payload.cardName, cvc: action.payload.cvc, error: '' };
         case getCardFailure.toString():
             return { ...state, isLoading: false, hasCard: false, error: action.payload.error };
         default:

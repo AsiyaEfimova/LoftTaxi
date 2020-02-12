@@ -12,6 +12,7 @@ class OrderForm extends React.Component {
         addressesList: []
     };
     componentDidMount() {
+        console.log(this.props);
         const {fetchAddressesRequest} = this.props;
         fetchAddressesRequest();
     }
@@ -31,7 +32,6 @@ class OrderForm extends React.Component {
     };
     render() {
         const {addressesList, addressFrom, addressTo} = this.state;
-        console.log(this.state, addressesList);
         return (
             <>
                 <form className="routeForm" onSubmit={this.handleSubmit}>
@@ -50,13 +50,9 @@ class OrderForm extends React.Component {
                         name={"addressTo"}
                         value={addressTo}
                         changeHandler={this.handlerInputChange}
-                        // itemList={loadAddressesList()}
                         itemList={addressesList}
                     />
-                    <Button text="Вызвать такси"
-                        // disabled={!addresses.addressFrom || !addresses.addressTo}
-                        // onClick={}
-                    />
+                    <Button text="Вызвать такси" />
                 </form>
             </>
         );

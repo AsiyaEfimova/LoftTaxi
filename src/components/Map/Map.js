@@ -3,7 +3,6 @@ import {connect } from 'react-redux';
 import {fetchAddressesRequest} from '../../modules/Addresses/addressActions';
 import {fetchRouteRequest} from '../../modules/Routes';
 import {drawRoute} from './DrawRoute'
-import Header from '../Header';
 import OrderForm from '../OrderForm';
 import mapboxgl from 'mapbox-gl';
 mapboxgl.accessToken = 'pk.eyJ1IjoiZWZpbW92YWFzaXlhIiwiYSI6ImNrNXJ3azVmaTBna3ozZW1sZ3lmNTJnMTgifQ.K6Q-q93TYcDSl9R1KSHWRA';
@@ -33,15 +32,12 @@ class Map extends React.Component {
     }
     render() {
         return (
-            <>
-                <Header />
-                <div id="page">
-                    <div id="mapBox" ref={this.mapContainer}></div>
-                    <div className="widthFix">
-                        <OrderForm />
-                    </div>
+            <div id="page">
+                <div id="mapBox" ref={this.mapContainer}></div>
+                <div className="widthFix">
+                    <OrderForm />
                 </div>
-            </>
+            </div>
         );
     }
 }

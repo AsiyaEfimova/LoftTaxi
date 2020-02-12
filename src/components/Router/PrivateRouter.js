@@ -1,9 +1,10 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+import {useSelector} from 'react-redux';
+import {getIsAuthorized} from '../../modules/Auth/authSelectors';
 
-const PrivateRoute = ({privateState, component: Component, ...rest }) => {
-    let isAuthorized = privateState.loginReducer.isAuthorized;
+const PrivateRoute = ({component: Component, ...rest }) => {
+    const isAuthorized = useSelector(getIsAuthorized);
     return (
         <Route
             {...rest}
@@ -14,8 +15,4 @@ const PrivateRoute = ({privateState, component: Component, ...rest }) => {
     );
 };
 
-const mapStateToProps = (state) => ({
-    privateState: state
-});
-
-export default connect(mapStateToProps)(PrivateRoute);
+export default PrivateRoute;
