@@ -5,10 +5,10 @@ import {
     postRegisterRequest,
     postRegisterSuccess,
     postRegisterFailure
-} from './authActions';
+} from './actions';
 import {setItems, removeItems} from '../../services/localSrorage';
 
-export const authMiddleware = store => next => action => {
+export const middleware = store => next => action => {
     switch(action.type){
         case postLoginRequest.toString():
             fetch('https://loft-taxi.glitch.me/auth', {

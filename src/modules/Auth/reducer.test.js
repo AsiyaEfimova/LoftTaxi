@@ -1,4 +1,4 @@
-import {loginReducer} from './authReducer'
+import {loginReducer} from './reducer'
 
 describe('Тестирование редьюсера loginReducer', () => {
     it("Тест postLoginRequest", () => {

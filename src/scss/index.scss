@@ -103,6 +103,16 @@ header {
         }
     }
 }
+.errorBox {}
 
-@include laptop {}
-@include desktop {}
+
+
+/*
+<div className="errorBox">
+    <div className="logoBox">
+        <img src={logo} className="logo" alt="logo" />
+    </div>
+    <h1>404</h1>
+    <Link to="/map">Перейти на карту</Link>
+</div>
+*/

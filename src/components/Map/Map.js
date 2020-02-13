@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect } from 'react-redux';
-import {fetchAddressesRequest} from '../../modules/Addresses/addressActions';
+import {fetchAddressesRequest} from '../../modules/Addresses/actions';
 import {fetchRouteRequest} from '../../modules/Routes';
 import {drawRoute} from './DrawRoute'
 import OrderForm from '../OrderForm';
@@ -19,7 +19,6 @@ class Map extends React.Component {
         });
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log(this.props.addresses);
         if (this.map.getLayer('route')) {
             this.map.removeLayer('route');
             this.map.removeSource('route');

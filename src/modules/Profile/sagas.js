@@ -6,7 +6,7 @@ import {
     getCardRequest,
     getCardSuccess,
     getCardFailure
-} from './profileActions';
+} from './actions';
 import {postCard, fetchCard} from '../../api';
 
 export function* postCardSaga (){

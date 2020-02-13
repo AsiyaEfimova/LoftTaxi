@@ -3,7 +3,7 @@ import {
     fetchRouteSuccess,
     fetchRouteFailure
 } from './actions';
-import {initialState} from "../../store/authStore";
+import {initialState} from "../../store/store";
 
 export const routeReducer = (state = initialState.routeReducer, action) => {
     switch (action.type) {

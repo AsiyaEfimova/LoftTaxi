@@ -1,4 +1,4 @@
-import {cardReducer} from './profileReducer'
+import {cardReducer} from './reducer'
 
 describe('Тестирование редьюсера cardReducer', () => {
     it("Тест postCardRequest", () => {

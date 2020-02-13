@@ -4,7 +4,6 @@ const Input = (props) => {
     let className;
     props.class ? (className = ' ' + props.class) : (className = '');
     const ChangeHandler = (e) => {
-        console.log(props);
         if(props.changeHandler) {
             props.changeHandler({name: props.name, value: e.target.value});
         }

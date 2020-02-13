@@ -1,4 +1,4 @@
-import {initialState} from '../../store/authStore';
+import {initialState} from '../../store/store';
 import {
     postLoginRequest,
     postLoginSuccess,
@@ -7,7 +7,7 @@ import {
     postRegisterSuccess,
     postRegisterFailure,
     postLogOut
-} from './authActions';
+} from './actions';
 
 export const loginReducer = (state = initialState.loginReducer, action) => {
     switch (action.type) {
@@ -21,7 +21,7 @@ export const loginReducer = (state = initialState.loginReducer, action) => {
         case postRegisterFailure.toString():
             return { ...state, isLoading: false, isAuthorized: action.payload.success, token: '', error: action.payload.error };
         case postLogOut.toString():
-            return { ...state, isLoading: false, isAuthorized: false, token: '', error: '' };
+            return { ...state, isLoading: false, isAuthorized: false, login: '', password: '', token: '', error: '' };
         default:
             return state;
     }

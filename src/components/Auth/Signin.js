@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { postLoginRequest, postLoginSuccess } from '../../modules/Auth/authActions';
+import { Redirect, Link } from 'react-router-dom';
+import { postLoginRequest, postLoginSuccess } from '../../modules/Auth/actions';
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
-import {setItems, getItems, removeItems} from '../../services/localSrorage';
+// import {setItems, getItems, removeItems} from '../../services/localSrorage';
 
 class Signin extends React.Component {
     state = {
@@ -12,7 +12,9 @@ class Signin extends React.Component {
         password: ''
     };
     componentDidMount() {
-        let savedInfo = getItems('user');
+        console.log(this.props);
+        // let savedInfo = getItems('user');
+        let savedInfo = null;
         if(savedInfo!==null) {
             const {postLoginSuccess} = this.props;
             postLoginSuccess({success: true, token: savedInfo.token});
@@ -28,12 +30,12 @@ class Signin extends React.Component {
         this.setState({ [name]: value });
     };
 
-    handleClick = (e) => {
-        e.preventDefault();
-        const { changeForm } = this.props;
-
-        changeForm(false);
-    };
+    // handleClick = (e) => {
+    //     e.preventDefault();
+    //     const { changeForm } = this.props;
+    //
+    //     changeForm(false);
+    // };
 
     render() {
         const { isAuthorized } = this.props;
@@ -44,9 +46,7 @@ class Signin extends React.Component {
                 <h1>Войти</h1>
                 <p>
                     Новый пользователь?{' '}
-                    <a href="/" onClick={this.handleClick}>
-                        Зарегистрируйтесь
-                    </a>
+                    <Link to="/signup">Зарегистрируйтесь</Link>
                 </p>
                 <div className="fieldset">
                     <Input

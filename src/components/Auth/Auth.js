@@ -4,18 +4,8 @@ import Signup from './Signup';
 import Signin from './Signin';
 
 class Auth extends React.Component {
-    state = {
-        signIn: true
-    };
-
-    changeForm = (state) => {
-        this.setState({
-            signIn: state
-        });
-    };
-
     render() {
-        const { signIn } = this.state;
+        const signIn = this.props.location.pathname === '/signin';
 
         return (
             <div id="entryPage">
@@ -26,9 +16,9 @@ class Auth extends React.Component {
                         </div>
                         <div className="formBox">
                             {signIn ? (
-                                <Signin changeForm={this.changeForm} />
+                                <Signin />
                             ) : (
-                                <Signup changeForm={this.changeForm} />
+                                <Signup />
                             )}
                         </div>
                     </div>

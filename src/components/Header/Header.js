@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../../img/logo.png';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {postLogOut} from '../../modules/Auth/authActions';
+import {postLogOut} from '../../modules/Auth/actions';
 import {removeItems} from '../../services/localSrorage';
 
 const Header = (props) => {

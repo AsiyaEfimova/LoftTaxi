@@ -1,5 +1,5 @@
-import {initialState} from '../../store/authStore';
-import {postCardRequest, postCardSuccess, postCardFailure, getCardRequest, getCardSuccess, getCardFailure} from './profileActions';
+import {initialState} from '../../store/store';
+import {postCardRequest, postCardSuccess, postCardFailure, getCardRequest, getCardSuccess, getCardFailure} from './actions';
 
 export const cardReducer = (state = initialState.cardReducer, action) => {
     switch (action.type) {

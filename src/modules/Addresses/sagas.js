@@ -3,7 +3,7 @@ import {
     fetchAddressesRequest,
     fetchAddressesSuccess,
     fetchAddressesFailure
-} from './addressActions';
+} from './actions';
 import {fetchAddressList} from '../../api';
 
 export function* addressListSaga (){

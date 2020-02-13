@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {postCardRequest, getCardRequest} from "../../modules/Profile/profileActions";
+import {postCardRequest, getCardRequest} from "../../modules/Profile/actions";
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
 

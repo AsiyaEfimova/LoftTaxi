@@ -1,8 +1,8 @@
 import {
     postCardRequest, postCardSuccess, postCardFailure, getCardRequest, getCardSuccess, getCardFailure
-} from './profileActions';
+} from './actions';
 
-export const profileMiddleware = store => next => action => {
+export const middleware = store => next => action => {
     switch(action.type){
         case postCardRequest.toString():
             fetch('https://loft-taxi.glitch.me/card', {

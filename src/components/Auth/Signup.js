@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import {postRegisterRequest} from '../../modules/Auth/authActions';
+import {Link, Redirect} from 'react-router-dom';
+import {postRegisterRequest} from '../../modules/Auth/actions';
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
 
@@ -20,12 +20,12 @@ class Signup extends React.Component {
     handlerInputChange = ({ name, value }) => {
         this.setState({ [name]: value });
     };
-    handleClick = (e) => {
-        e.preventDefault();
-        const { changeForm } = this.props;
-
-        changeForm(true);
-    };
+    // handleClick = (e) => {
+    //     e.preventDefault();
+    //     const { changeForm } = this.props;
+    //
+    //     changeForm(true);
+    // };
     render() {
         const { isAuthorized } = this.props;
         return isAuthorized ? (
@@ -34,7 +34,7 @@ class Signup extends React.Component {
             <form className="entryForm" onSubmit={this.handleSubmit}>
                 <h1>Регистрация</h1>
                 <p>
-                    Уже зарегистрирован? <a href="/" onClick={this.handleClick}>Войти</a>
+                    Уже зарегистрирован? <Link to="/signin">Войти</Link>
                 </p>
                 <div className="fieldset">
                     <Input

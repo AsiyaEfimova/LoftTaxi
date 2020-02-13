@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {postCardRequest, getCardRequest, postCardSuccess, getCardSuccess} from "../../modules/Profile/profileActions";
+import {postCardRequest, getCardRequest, postCardSuccess, getCardSuccess} from "../../modules/Profile/actions";
 import PaymentForm from '../PaymentForm';
 import Alert from '../../elements/Alert';
 

@@ -3,7 +3,7 @@ import './scss/app.scss';
 import Router from './components/Router';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import createStore from './store/authStore';
+import createStore from './store/store';
 
 const store = createStore();
 

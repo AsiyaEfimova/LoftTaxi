@@ -1,6 +1,6 @@
 import React from 'react';
-import {connect } from 'react-redux';
-import {fetchAddressesRequest} from '../../modules/Addresses/addressActions';
+import {connect} from 'react-redux';
+import {fetchAddressesRequest} from '../../modules/Addresses/actions';
 import {fetchRouteRequest} from '../../modules/Routes';
 import InputAutocomplete from '../../elements/InputAutocomplete';
 import Button from '../../elements/Button';
@@ -12,13 +12,12 @@ class OrderForm extends React.Component {
         addressesList: []
     };
     componentDidMount() {
-        console.log(this.props);
         const {fetchAddressesRequest} = this.props;
         fetchAddressesRequest();
     }
     componentDidUpdate(prevProps, prevState) {
         if(this.props !== prevProps){
-            this.setState({addressesList: this.props.addressesList.addresses});
+            this.setState({addressesList: this.props.addressesList});
         }
     }
     handleSubmit = (e) => {
@@ -27,7 +26,6 @@ class OrderForm extends React.Component {
         fetchRouteRequest({addressFrom: this.state.addressFrom, addressTo: this.state.addressTo});
     };
     handlerInputChange = (inputData) => {
-        console.log(inputData);
         this.setState(inputData);
     };
     render() {
