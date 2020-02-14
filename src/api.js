@@ -1,44 +1,15 @@
-export const postLogin = request =>
-    fetch('https://loft-taxi.glitch.me/auth', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(request)
-    })
-    .then(response => response.json());
+import axios from 'axios';
 
-export const postRegister = request =>
-    fetch('https://loft-taxi.glitch.me/register', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(request)
-    })
-        .then(response => response.json());
+axios.defaults.baseURL = 'https://loft-taxi.glitch.me';
 
-export const postCard = request =>
-    fetch('https://loft-taxi.glitch.me/card', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(request)
-    })
-        .then(response => response.json());
+export const postLogin = request => axios.post('/auth', request).then(response => response.data);
 
-export const fetchCard = token =>
-    fetch(`https://loft-taxi.glitch.me/card?token=${token}`, {
-        method: 'GET',
-        headers: {'Content-Type': 'application/json'}
-    })
-        .then(response => response.json());
+export const postRegister = request => axios.post('/register', request).then(response => response.data);
 
-export const fetchAddressList = ()=>
-    fetch('https://loft-taxi.glitch.me/addressList', {
-        method: 'GET',
-        headers: {'Content-Type': 'application/json'}
-    })
-        .then(response => response.json());
+export const postCard = request => axios.post('/card', request).then(response => response.data);
 
-export const fetchRoute = ({addressFrom, addressTo})=>
-    fetch(`https://loft-taxi.glitch.me/route?address1=${addressFrom}&address2=${addressTo}`, {
-        method: 'GET',
-        headers: {'Content-Type': 'application/json'}
-    })
-        .then(response => response.json());
+export const fetchCard = token => axios.get(`/card?token=${token}`, { 'headers': {'Content-Type': 'application/json'}}).then(response => response.data);
+
+export const fetchAddressList = () => axios.get('/addressList', { 'headers': {'Content-Type': 'application/json'}}).then(response => response.data);
+
+export const fetchRoute = ({addressFrom, addressTo}) => axios.get(`/route?address1=${addressFrom}&address2=${addressTo}`, { 'headers': {'Content-Type': 'application/json'}}).then(response => response.data);

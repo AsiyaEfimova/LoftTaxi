@@ -18,17 +18,8 @@ class Profile extends React.Component {
             this.setState(this.props);
         }
     }
-    // handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     const {postCardRequest} = this.props;
-    //     postCardRequest(this.state);
-    // };
-    // handlerInputChange = ({ name, value }) => {
-    //     this.setState({ [name]: value });
-    // };
     render() {
         const {hasCard} = this.state;
-        console.log(this.state,hasCard);
         return (
             <div id="page">
                 <div className="widthFix">
@@ -49,10 +40,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-    getCardRequest,
-    postCardRequest,
-    postCardSuccess,
-    getCardSuccess
+    getCardRequest
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
