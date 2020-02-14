@@ -22,7 +22,7 @@ export function* loginSaga (){
                     token: response.token
                 });
             }else{
-                yield put(postLoginFailure(response.error));
+                yield put(postLoginFailure(response));
             }
         } catch (error) {
             yield put(postLoginFailure(error));
@@ -44,7 +44,7 @@ export function* registerSaga (){
                     token: response.token
                 });
             }else{
-                yield put(postLoginFailure(response.error));
+                yield put(postLoginFailure(response));
             }
         } catch (error) {
             yield put(postRegisterFailure(error));

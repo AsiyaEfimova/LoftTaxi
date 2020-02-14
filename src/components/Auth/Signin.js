@@ -4,22 +4,13 @@ import { Redirect, Link } from 'react-router-dom';
 import { postLoginRequest, postLoginSuccess } from '../../modules/Auth/actions';
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
-// import {setItems, getItems, removeItems} from '../../services/localSrorage';
+import ErrorMessage from '../../elements/ErrorMessage';
 
 class Signin extends React.Component {
     state = {
         email: '',
         password: ''
     };
-    componentDidMount() {
-        console.log(this.props);
-        // let savedInfo = getItems('user');
-        let savedInfo = null;
-        if(savedInfo!==null) {
-            const {postLoginSuccess} = this.props;
-            postLoginSuccess({success: true, token: savedInfo.token});
-        }
-    }
     handleSubmit = (e) => {
         e.preventDefault();
         const {postLoginRequest} = this.props;
@@ -30,15 +21,8 @@ class Signin extends React.Component {
         this.setState({ [name]: value });
     };
 
-    // handleClick = (e) => {
-    //     e.preventDefault();
-    //     const { changeForm } = this.props;
-    //
-    //     changeForm(false);
-    // };
-
     render() {
-        const { isAuthorized } = this.props;
+        const { isAuthorized, error } = this.props;
         return isAuthorized ? (
             <Redirect to="/map" />
         ) : (
@@ -62,6 +46,7 @@ class Signin extends React.Component {
                         changeHandler={this.handlerInputChange}
                     />
                 </div>
+                <ErrorMessage error={error}/>
                 <Button text="Войти" />
             </form>
         );

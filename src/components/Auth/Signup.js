@@ -4,6 +4,7 @@ import {Link, Redirect} from 'react-router-dom';
 import {postRegisterRequest} from '../../modules/Auth/actions';
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
+import ErrorMessage from "../../elements/ErrorMessage";
 
 class Signup extends React.Component {
     state = {
@@ -20,14 +21,8 @@ class Signup extends React.Component {
     handlerInputChange = ({ name, value }) => {
         this.setState({ [name]: value });
     };
-    // handleClick = (e) => {
-    //     e.preventDefault();
-    //     const { changeForm } = this.props;
-    //
-    //     changeForm(true);
-    // };
     render() {
-        const { isAuthorized } = this.props;
+        const { isAuthorized, error } = this.props;
         return isAuthorized ? (
             <Redirect to="/map" />
         ) : (
@@ -64,6 +59,7 @@ class Signup extends React.Component {
                         changeHandler={this.handlerInputChange}
                     />
                 </div>
+                <ErrorMessage error={error}/>
                 <Button text="Зарегистрироваться" />
             </form>
         );

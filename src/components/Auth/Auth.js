@@ -5,7 +5,7 @@ import Signin from './Signin';
 
 class Auth extends React.Component {
     render() {
-        const signIn = this.props.location.pathname === '/signin';
+        const signUp = this.props.location.pathname === '/signup';
 
         return (
             <div id="entryPage">
@@ -15,10 +15,10 @@ class Auth extends React.Component {
                             <img src={logo} className="logo" alt="logo" />
                         </div>
                         <div className="formBox">
-                            {signIn ? (
-                                <Signin />
-                            ) : (
+                            {signUp ? (
                                 <Signup />
+                            ) : (
+                                <Signin />
                             )}
                         </div>
                     </div>

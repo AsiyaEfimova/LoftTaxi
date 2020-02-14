@@ -5,7 +5,7 @@ import {routeReducer} from '../modules/Routes/reducer';
 import {addressesReducer} from '../modules/Addresses/reducer';
 import createSagaMiddleWare from 'redux-saga';
 import { rootSaga } from '../modules/rootSaga';
-import {setItems, getItems, removeItems} from '../services/localSrorage';
+import {getItems} from '../services/localSrorage';
 
 const sagaMiddleware = createSagaMiddleWare();
 
