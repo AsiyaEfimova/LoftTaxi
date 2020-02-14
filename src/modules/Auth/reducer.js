@@ -6,7 +6,8 @@ import {
     postRegisterRequest,
     postRegisterSuccess,
     postRegisterFailure,
-    postLogOut
+    postLogOut,
+    clearError
 } from './actions';
 
 export const loginReducer = (state = initialState.loginReducer, action) => {
@@ -22,6 +23,8 @@ export const loginReducer = (state = initialState.loginReducer, action) => {
             return { ...state, isLoading: false, isAuthorized: action.payload.success, token: '', error: action.payload.error };
         case postLogOut.toString():
             return { ...state, isLoading: false, isAuthorized: false, login: '', password: '', token: '', error: '' };
+        case clearError.toString():
+            return { ...state, error: '' };
         default:
             return state;
     }

@@ -9,3 +9,5 @@ export const postRegisterSuccess = createAction('POST_REGISTER_SUCCESS');
 export const postRegisterFailure = createAction('POST_REGISTER_FAILURE');
 
 export const postLogOut = createAction('POST_LOGOUT');
+
+export const clearError = createAction('CLEAR_ERROR');

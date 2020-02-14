@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
-import {postRegisterRequest} from '../../modules/Auth/actions';
+import {postRegisterRequest,clearError} from '../../modules/Auth/actions';
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
 import ErrorMessage from "../../elements/ErrorMessage";
+import Loader from "../../elements/Loader";
 
 class Signup extends React.Component {
     state = {
@@ -13,6 +14,13 @@ class Signup extends React.Component {
         surname: '',
         password: ''
     };
+    componentDidMount() {
+        const { error } = this.props;
+        if(error){
+            const {clearError} = this.props;
+            clearError();
+        }
+    }
     handleSubmit = (e) => {
         e.preventDefault();
         const {postRegisterRequest} = this.props;
@@ -22,7 +30,7 @@ class Signup extends React.Component {
         this.setState({ [name]: value });
     };
     render() {
-        const { isAuthorized, error } = this.props;
+        const { isAuthorized, error, isLoading } = this.props;
         return isAuthorized ? (
             <Redirect to="/map" />
         ) : (
@@ -59,6 +67,7 @@ class Signup extends React.Component {
                         changeHandler={this.handlerInputChange}
                     />
                 </div>
+                <Loader isLoading={isLoading}/>
                 <ErrorMessage error={error}/>
                 <Button text="Зарегистрироваться" />
             </form>
@@ -69,7 +78,8 @@ class Signup extends React.Component {
 const mapStateToProps = (state) => state.loginReducer;
 
 const mapDispatchToProps = {
-    postRegisterRequest
+    postRegisterRequest,
+    clearError
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

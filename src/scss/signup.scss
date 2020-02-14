@@ -62,6 +62,10 @@
             .button {
                 float: right;
             }
+            .errorMessage {
+                margin: 0 0 30px 0;
+                color: $red;
+            }
         }
     }
 }

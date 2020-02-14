@@ -1,16 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
-import { postLoginRequest, postLoginSuccess } from '../../modules/Auth/actions';
+import { postLoginRequest, clearError } from '../../modules/Auth/actions';
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
 import ErrorMessage from '../../elements/ErrorMessage';
+import Loader from '../../elements/Loader';
 
 class Signin extends React.Component {
     state = {
         email: '',
         password: ''
     };
+    componentDidMount() {
+        const { error } = this.props;
+        if(error){
+            const {clearError} = this.props;
+            clearError();
+        }
+    }
     handleSubmit = (e) => {
         e.preventDefault();
         const {postLoginRequest} = this.props;
@@ -22,7 +30,7 @@ class Signin extends React.Component {
     };
 
     render() {
-        const { isAuthorized, error } = this.props;
+        const { isAuthorized, error, isLoading } = this.props;
         return isAuthorized ? (
             <Redirect to="/map" />
         ) : (
@@ -46,6 +54,7 @@ class Signin extends React.Component {
                         changeHandler={this.handlerInputChange}
                     />
                 </div>
+                <Loader isLoading={isLoading}/>
                 <ErrorMessage error={error}/>
                 <Button text="Войти" />
             </form>
@@ -57,7 +66,7 @@ const mapStateToProps = (state) => state.loginReducer;
 
 const mapDispatchToProps = {
     postLoginRequest,
-    postLoginSuccess
+    clearError
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signin);
