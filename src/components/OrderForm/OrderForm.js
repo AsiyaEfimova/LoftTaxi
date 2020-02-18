@@ -1,69 +1,66 @@
-import React from 'react';
-import {connect} from 'react-redux';
+import React, {useState, useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {fetchAddressesRequest} from '../../modules/Addresses/actions';
 import {fetchRouteRequest} from '../../modules/Routes';
+import {getIsLoading, getLoadError, getAddressesList} from "../../modules/Addresses/selectors";
 import InputAutocomplete from '../../elements/InputAutocomplete';
 import Button from '../../elements/Button';
+import Loader from "../../elements/Loader";
+import ErrorMessage from "../../elements/ErrorMessage";
 
-class OrderForm extends React.Component {
-    state = {
+const OrderForm = ()=> {
+    const [addresses, setAddresses] = useState({
         addressFrom: '',
         addressTo: '',
         addressesList: []
-    };
-    componentDidMount() {
-        const {fetchAddressesRequest} = this.props;
-        fetchAddressesRequest();
-    }
-    componentDidUpdate(prevProps, prevState) {
-        if(this.props !== prevProps){
-            this.setState({addressesList: this.props.addressesList});
-        }
-    }
-    handleSubmit = (e) => {
+    });
+    const dispatch = useDispatch();
+    const isLoading = useSelector(getIsLoading),
+        error = useSelector(getLoadError),
+        addressesList = useSelector(getAddressesList);
+
+    useEffect(()=>{
+        dispatch(fetchAddressesRequest());
+    },[dispatch]);
+
+    useEffect((addresses)=>{
+        setAddresses({...addresses, addressesList: addressesList});
+    },[dispatch, addressesList]);
+
+    const handleSubmit = (e) => {
         e.preventDefault();
-        const {fetchRouteRequest} = this.props;
-        fetchRouteRequest({addressFrom: this.state.addressFrom, addressTo: this.state.addressTo});
+        dispatch(fetchRouteRequest({addressFrom: addresses.addressFrom, addressTo: addresses.addressTo}));
     };
-    handlerInputChange = (inputData) => {
-        this.setState(inputData);
+    const handlerInputChange = (inputData) => {
+        setAddresses({...addresses, ...inputData});
     };
-    render() {
-        const {addressesList, addressFrom, addressTo} = this.state;
-        return (
-            <>
-                <form className="routeForm" onSubmit={this.handleSubmit}>
-                    <div className="routeLine"></div>
-                    <InputAutocomplete
-                        label="Откуда"
-                        type="text"
-                        name={"addressFrom"}
-                        value={addressFrom}
-                        changeHandler={this.handlerInputChange}
-                        itemList={addressesList}
-                    />
-                    <InputAutocomplete
-                        label="Куда"
-                        type="text"
-                        name={"addressTo"}
-                        value={addressTo}
-                        changeHandler={this.handlerInputChange}
-                        itemList={addressesList}
-                    />
-                    <Button text="Вызвать такси" />
-                </form>
-            </>
-        );
-    }
-}
 
-const mapStateToProps = (state) => ({
-    addressesList: state.addressesReducer.addresses
-});
-
-const mapDispatchToProps = {
-    fetchAddressesRequest,
-    fetchRouteRequest
+    return (
+        <>
+            <form className="routeForm" onSubmit={handleSubmit}>
+                <div className="routeLine"></div>
+                <InputAutocomplete
+                    label="Откуда"
+                    type="text"
+                    name={"addressFrom"}
+                    value={addresses.addressFrom}
+                    changeHandler={handlerInputChange}
+                    itemList={addresses.addressesList}
+                />
+                <InputAutocomplete
+                    label="Куда"
+                    type="text"
+                    name={"addressTo"}
+                    value={addresses.addressTo}
+                    changeHandler={handlerInputChange}
+                    itemList={addresses.addressesList}
+                />
+                <Loader isLoading={isLoading}/>
+                <ErrorMessage error={error}/>
+                <Button text="Вызвать такси" />
+            </form>
+        </>
+    );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderForm);
+export default OrderForm;

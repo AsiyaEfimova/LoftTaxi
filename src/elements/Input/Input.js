@@ -23,8 +23,17 @@ const Input = (props) => {
                 value={props.value}
                 onChange={ChangeHandler}
                 onFocus={FocusHandler}
+                ref={props.register}
             />
         </div>
     );
 };
 export default Input;
+
+
+// const Input = ({ label, register, required }) => (
+//     <>
+//         <label>{label}</label>
+//         <input name={label} ref={register({ required })} />
+//     </>
+// )

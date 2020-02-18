@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import logo from '../../img/logo-white.png';
 
 const errorPage = () => {
-    console.log(1);
     return (
         <div id="page">
             <div className="widthFix">

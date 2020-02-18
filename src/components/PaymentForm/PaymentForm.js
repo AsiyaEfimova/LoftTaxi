@@ -1,96 +1,94 @@
-import React from 'react';
-import {connect} from "react-redux";
+import React, {useState, useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {postCardRequest, getCardRequest} from "../../modules/Profile/actions";
+import {getToken, getCard, getHasCard, getIsLoading, getError} from "../../modules/Profile/selectors";
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
+import Loader from "../../elements/Loader";
+import ErrorMessage from "../../elements/ErrorMessage";
 
-class PaymentForm extends React.Component {
-    state = {
+const PaymentForm = () => {
+    const [card, setCard] = useState({
         token: '',
         cardNumber: '',
         expiryDate: '',
         cardName: '',
         cvc: ''
-    };
-    componentDidMount() {
-        this.setState({token: this.props.token});
-        const {getCardRequest} = this.props;
-        getCardRequest(this.props.token);
-    }
-    componentDidUpdate(prevProps, prevState) {
-        if(this.props !== prevProps){
-            this.setState(this.props);
-        }
-    }
-    handleSubmit = (e) => {
+    });
+    const dispatch = useDispatch();
+    const isLoading = useSelector(getIsLoading),
+        error = useSelector(getError),
+        hasCard = useSelector(getHasCard),
+        cardData = useSelector(getCard),
+        token = useSelector(getToken);
+
+    useEffect((card)=>{
+        setCard({...card, ...cardData});
+    },[dispatch,cardData]);
+
+    useEffect((token)=>{
+        dispatch(getCardRequest(token));
+    },[dispatch]);
+
+    useEffect((card)=>{
+        setCard({...card, ...cardData});
+    },[dispatch, cardData]);
+
+    const handleSubmit = (e) => {
         e.preventDefault();
-        const {postCardRequest} = this.props;
-        postCardRequest(this.state);
+        dispatch(postCardRequest(card));
     };
-    handlerInputChange = ({ name, value }) => {
-        this.setState({ [name]: value });
+    const handlerInputChange = ({ name, value }) => {
+        setCard({...card, [name]: value});
     };
-    render() {
-        const {cardNumber,expiryDate,cardName,cvc} = this.state;
-        return (
-            <form className="paymentForm" onSubmit={this.handleSubmit}>
-                <h1>
-                    Профиль
-                    <small>Способ оплаты</small>
-                </h1>
-                <div className="fieldSet">
-                    <fieldset className="card">
-                        <div className="cardIco"></div>
-                        <Input
-                            label="Номер карты:"
-                            type="text"
-                            name="cardNumber"
-                            value={cardNumber}
-                            changeHandler={this.handlerInputChange}
-                        />
-                        <Input
-                            label="Срок действия:"
-                            type="text"
-                            name="expiryDate"
-                            value={expiryDate}
-                            changeHandler={this.handlerInputChange}
-                        />
-                    </fieldset>
-                    <fieldset className="card">
-                        <Input
-                            label="Имя владельца:"
-                            type="text"
-                            name="cardName"
-                            value={cardName}
-                            changeHandler={this.handlerInputChange}
-                        />
-                        <Input
-                            label="CVC:"
-                            type="password"
-                            name="cvc"
-                            value={cvc}
-                            changeHandler={this.handlerInputChange}
-                        />
-                    </fieldset>
-                </div>
-                <Button text="Сохранить" />
-                <div className="toolTip"></div>
-            </form>
-        );
-    }
-}
 
-const mapStateToProps = (state) => ({
-    token: state.loginReducer.token,
-    cardNumber: state.cardReducer.cardNumber,
-    expiryDate: state.cardReducer.expiryDate,
-    cardName: state.cardReducer.cardName,
-    cvc: state.cardReducer.cvc
-});
-
-const mapDispatchToProps = {
-    postCardRequest,
-    getCardRequest
+    return (
+        <form className="paymentForm" onSubmit={handleSubmit}>
+            <h1>
+                Профиль
+                <small>Способ оплаты</small>
+            </h1>
+            <div className="fieldSet">
+                <fieldset className="card">
+                    <div className="cardIco"></div>
+                    <Input
+                        label="Номер карты:"
+                        type="text"
+                        name="cardNumber"
+                        value={card.cardNumber}
+                        changeHandler={handlerInputChange}
+                    />
+                    <Input
+                        label="Срок действия:"
+                        type="text"
+                        name="expiryDate"
+                        value={card.expiryDate}
+                        changeHandler={handlerInputChange}
+                    />
+                </fieldset>
+                <fieldset className="card">
+                    <Input
+                        label="Имя владельца:"
+                        type="text"
+                        name="cardName"
+                        value={card.cardName}
+                        changeHandler={handlerInputChange}
+                    />
+                    <Input
+                        label="CVC:"
+                        type="password"
+                        name="cvc"
+                        value={card.cvc}
+                        changeHandler={handlerInputChange}
+                    />
+                </fieldset>
+            </div>
+            <Loader isLoading={isLoading}/>
+            <ErrorMessage error={error}/>
+            <Button text="Сохранить" />
+            <div className="toolTip"></div>
+        </form>
+    );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PaymentForm);
+export default PaymentForm;

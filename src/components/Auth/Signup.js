@@ -1,85 +1,80 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, {useState, useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
-import {postRegisterRequest,clearError} from '../../modules/Auth/actions';
+import {postRegisterRequest, clearError} from '../../modules/Auth/actions';
+import {getIsAuthorized, getIsLoading, getError} from '../../modules/Auth/selectors';
+import { useForm } from 'react-hook-form';
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
 import ErrorMessage from "../../elements/ErrorMessage";
 import Loader from "../../elements/Loader";
 
-class Signup extends React.Component {
-    state = {
+const Signup = ()=> {
+    const [user, setUser] = useState({
         email: '',
         name: '',
         surname: '',
         password: ''
-    };
-    componentDidMount() {
-        const { error } = this.props;
-        if(error){
-            const {clearError} = this.props;
-            clearError();
-        }
-    }
-    handleSubmit = (e) => {
+    });
+    const dispatch = useDispatch(),
+        isAuthorized = useSelector(getIsAuthorized),
+        isLoading = useSelector(getIsLoading),
+        error = useSelector(getError);
+
+    useEffect(()=>{
+        dispatch(clearError());
+    },[dispatch]);
+
+
+    const handleSubmit = (e) => {
         e.preventDefault();
-        const {postRegisterRequest} = this.props;
-        postRegisterRequest(this.state);
+        dispatch(postRegisterRequest(user));
     };
-    handlerInputChange = ({ name, value }) => {
-        this.setState({ [name]: value });
+    const handlerInputChange = ({ name, value }) => {
+        setUser({...user, [name]: value});
     };
-    render() {
-        const { isAuthorized, error, isLoading } = this.props;
-        return isAuthorized ? (
-            <Redirect to="/map" />
-        ) : (
-            <form className="entryForm" onSubmit={this.handleSubmit}>
-                <h1>Регистрация</h1>
-                <p>
-                    Уже зарегистрирован? <Link to="/signin">Войти</Link>
-                </p>
-                <div className="fieldset">
-                    <Input
-                        label="Адрес электронной почты"
-                        type="text"
-                        name="email"
-                        changeHandler={this.handlerInputChange}
-                    />
-                    <Input
-                        label="Имя"
-                        type="text"
-                        name="name"
-                        class="half"
-                        changeHandler={this.handlerInputChange}
-                    />
-                    <Input
-                        label="Фамилия"
-                        type="text"
-                        name="surname"
-                        class="half"
-                        changeHandler={this.handlerInputChange}
-                    />
-                    <Input
-                        label="Пароль"
-                        type="password"
-                        name="password"
-                        changeHandler={this.handlerInputChange}
-                    />
-                </div>
-                <Loader isLoading={isLoading}/>
-                <ErrorMessage error={error}/>
-                <Button text="Зарегистрироваться" />
-            </form>
-        );
-    }
-}
 
-const mapStateToProps = (state) => state.loginReducer;
-
-const mapDispatchToProps = {
-    postRegisterRequest,
-    clearError
+    return isAuthorized ? (
+        <Redirect to="/map" />
+    ) : (
+        <form className="entryForm" onSubmit={handleSubmit}>
+            <h1>Регистрация</h1>
+            <p>
+                Уже зарегистрирован? <Link to="/signin">Войти</Link>
+            </p>
+            <div className="fieldset">
+                <Input
+                    label="Адрес электронной почты"
+                    type="text"
+                    name="email"
+                    changeHandler={handlerInputChange}
+                />
+                <Input
+                    label="Имя"
+                    type="text"
+                    name="name"
+                    class="half"
+                    changeHandler={handlerInputChange}
+                />
+                <Input
+                    label="Фамилия"
+                    type="text"
+                    name="surname"
+                    class="half"
+                    changeHandler={handlerInputChange}
+                />
+                <Input
+                    label="Пароль"
+                    type="password"
+                    name="password"
+                    changeHandler={handlerInputChange}
+                />
+            </div>
+            <Loader isLoading={isLoading}/>
+            <ErrorMessage error={error}/>
+            <Button text="Зарегистрироваться" />
+        </form>
+    );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default Signup;
