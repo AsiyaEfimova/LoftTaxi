@@ -1,3 +1,5 @@
+@import "../../scss/variables.scss";
+
 #mapBox {
     width: 100%;
     height: 100%;
@@ -43,7 +45,7 @@
         &:after {
             height: 27px;
             bottom: -33px;
-            background: url(../img/icons.png) 0 0 no-repeat;
+            background: url(../../img/icons.png) 0 0 no-repeat;
         }
     }
 }

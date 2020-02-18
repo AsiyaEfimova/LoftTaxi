@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import Input from '../../elements/Input';
+import React, { useState } from 'react';
+import ErrorMessage from "../ErrorMessage";
 
-const InputAutocomplete = (props) => {
-    const itemList = props.itemList;
+const InputAutocomplete = React.forwardRef(({name, label, type, value, focusHandler, inputClass, errors, rulles, itemList}, ref) => {
+    let className = '';
+    errors[name] && (className += ' error');
     const container = React.createRef();
     const [inputValue, setValue] = useState({
-        [props.name]: props.value
+        [name]: value
     });
     const changeHandler = (inputData) => {
-        // console.log(inputData);
-        setValue({ ...inputValue, [props.name]: inputData.value });
-        props.changeHandler(inputData);
+        setValue({ ...inputValue, [name]: inputData.value });
+    };
+    const handlerOnFocus = (e)=>{
+        openList();
     };
     const openList = () => {
         const list = container.current.querySelectorAll('.completeList');
@@ -30,22 +32,28 @@ const InputAutocomplete = (props) => {
     };
     const selectItem = (e)=>{
         let inpVal = e.target.getAttribute('value');
-        setValue({ ...inputValue, inpVal });
-        // console.log({[props.name]: inpVal});
-        changeHandler({[props.name]: inpVal});
+        setValue({ ...inputValue, [name]: inpVal });
         closeList();
     };
+    let errorMessage = '';
+    if(errors[name]){
+        rulles ? errorMessage = (rulles[errors[name].type]) : (errorMessage = errors[name].message)
+    }
     return (
         <div className="autoCompleteBox" ref={container}>
-            <Input
-                label={props.label}
-                type="text"
-                name={props.name}
-                value={props.value}
-                autoComplete={'off'}
-                focusHandler={openList}
-                changeHandler={changeHandler}
-            />
+            <div className={'input' + className}>
+                <label>{label}</label>
+                <input
+                    autoComplete='off'
+                    type={type}
+                    name={name}
+                    defaultValue={inputValue[name]}
+                    // onChange={ChangeHandler}
+                    onFocus={handlerOnFocus}
+                    ref={ref}
+                />
+                <ErrorMessage error={errorMessage}/>
+            </div>
             <div className="controls">
                 <div className="delete" onClick={clearInput}>
                     <svg height="20" width="20" viewBox="0 0 20 20" enableBackground="0 0 20 20" className="icon">
@@ -69,5 +77,5 @@ const InputAutocomplete = (props) => {
             </div>
         </div>
     );
-};
+});
 export default InputAutocomplete;

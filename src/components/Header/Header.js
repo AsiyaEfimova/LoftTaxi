@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {postLogOut} from '../../modules/Auth/actions';
 import {removeItems} from '../../services/localSrorage';
+import './header.scss'
 
 const Header = (props) => {
     const handleCkick = (e) => {

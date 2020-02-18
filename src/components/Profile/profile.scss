@@ -1,3 +1,5 @@
+@import "../../scss/variables.scss";
+
 .profileBlock {
     max-width: 950px;
     margin: 80px auto;
@@ -25,7 +27,7 @@
             position: absolute;
             right: 20px;
             top: 20px;
-            background: url(../img/icons.png) 0 -40px no-repeat;
+            background: url(../../img/icons.png) 0 -40px no-repeat;
         }
     }
     .input {

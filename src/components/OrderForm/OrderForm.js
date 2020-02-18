@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {fetchAddressesRequest} from '../../modules/Addresses/actions';
 import {fetchRouteRequest} from '../../modules/Routes';
 import {getIsLoading, getLoadError, getAddressesList} from "../../modules/Addresses/selectors";
+import { useForm } from 'react-hook-form';
 import InputAutocomplete from '../../elements/InputAutocomplete';
 import Button from '../../elements/Button';
 import Loader from "../../elements/Loader";
@@ -27,31 +28,36 @@ const OrderForm = ()=> {
         setAddresses({...addresses, addressesList: addressesList});
     },[dispatch, addressesList]);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        dispatch(fetchRouteRequest({addressFrom: addresses.addressFrom, addressTo: addresses.addressTo}));
+    const handleOnSubmit = (data) => {
+        dispatch(fetchRouteRequest(data));
     };
     const handlerInputChange = (inputData) => {
         setAddresses({...addresses, ...inputData});
     };
 
+    const { register, handleSubmit, errors } = useForm({
+        mode: "onSubmit"
+    });
+
     return (
         <>
-            <form className="routeForm" onSubmit={handleSubmit}>
+            <form className="routeForm" onSubmit={handleSubmit(handleOnSubmit)}>
                 <div className="routeLine"></div>
                 <InputAutocomplete
                     label="Откуда"
                     type="text"
-                    name={"addressFrom"}
-                    value={addresses.addressFrom}
+                    name="addressFrom"
+                    ref={register({required: "This is required"})}
+                    errors={errors}
                     changeHandler={handlerInputChange}
                     itemList={addresses.addressesList}
                 />
                 <InputAutocomplete
                     label="Куда"
                     type="text"
-                    name={"addressTo"}
-                    value={addresses.addressTo}
+                    name="addressTo"
+                    ref={register({required: "This is required"})}
+                    errors={errors}
                     changeHandler={handlerInputChange}
                     itemList={addresses.addressesList}
                 />

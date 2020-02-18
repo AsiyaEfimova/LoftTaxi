@@ -49,16 +49,6 @@ h3, .H3 {font: normal 20px/1.4 $font-bold; margin: 0 0 15px 0;}
         opacity: .25;
     }
 }
-#headerWrap {
-    height: 78px;
-    width: 100%;
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 10;
-    background: $white;
-    box-shadow: 0 0 10px rgba(0,0,0,.1);
-}
 #page {
     padding: 78px 0 0 0;
     position: relative;
@@ -77,29 +67,4 @@ h3, .H3 {font: normal 20px/1.4 $font-bold; margin: 0 0 15px 0;}
     width: 100%;
     height: 0;
     clear: both;
-}
-
-header {
-    height: 100%;
-    padding: 20px 15px;
-    @include flex(center, space-between,'','');
-    .logo {
-        display: block;
-        width: 154px;
-        height: 37px;
-    }
-}
-.topNav {
-    @include flex(center, '','','');
-    .navLink {
-        font: normal 16px/32px $font-regular;
-        padding: 0 15px;
-        border-radius: 2px;
-        text-decoration: none;
-        margin: 0 0 0 5px;
-        transition: $transition;
-        &:hover, &.current {
-            background: $grayF2;
-        }
-    }
 }

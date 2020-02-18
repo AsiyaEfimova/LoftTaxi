@@ -4,6 +4,7 @@ import {fetchAddressesRequest} from '../../modules/Addresses/actions';
 import {fetchRouteRequest} from '../../modules/Routes';
 import {drawRoute} from './DrawRoute'
 import OrderForm from '../OrderForm';
+import './map.scss';
 import mapboxgl from 'mapbox-gl';
 mapboxgl.accessToken = 'pk.eyJ1IjoiZWZpbW92YWFzaXlhIiwiYSI6ImNrNXJ3azVmaTBna3ozZW1sZ3lmNTJnMTgifQ.K6Q-q93TYcDSl9R1KSHWRA';
 

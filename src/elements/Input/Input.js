@@ -5,11 +5,6 @@ const Input = React.forwardRef(({name, label, type, autoComplete, value, focusHa
     let className;
     inputClass ? (className = ' ' + inputClass) : (className = '');
     errors[name] && (className += ' error');
-    // const ChangeHandler = (e) => {
-    //     if(props.changeHandler) {
-    //         props.changeHandler({name: props.name, value: e.target.value});
-    //     }
-    // };
     const handlerOnFocus = (e)=>{
         if(focusHandler){
             focusHandler(e.target);

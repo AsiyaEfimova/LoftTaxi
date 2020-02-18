@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {getCardRequest} from "../../modules/Profile/actions";
 import PaymentForm from '../PaymentForm';
 import Alert from '../../elements/Alert';
+import './profile.scss';
 
 class Profile extends React.Component {
     state = {

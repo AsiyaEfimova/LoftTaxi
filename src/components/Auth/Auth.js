@@ -2,6 +2,7 @@ import React from 'react';
 import logo from '../../img/logo-white.png';
 import Signup from './Signup';
 import Signin from './Signin';
+import "./auth.scss";
 
 class Auth extends React.Component {
     render() {

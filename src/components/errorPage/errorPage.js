@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../img/logo-white.png';
+import "./error.scss";
 
 const errorPage = () => {
     return (
