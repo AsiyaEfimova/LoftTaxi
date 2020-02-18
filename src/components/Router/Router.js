@@ -6,7 +6,7 @@ import Map from '../Map';
 import Auth from '../Auth';
 import errorPage from "../errorPage";
 import PrivateRoute from './PrivateRouter';
-import {Redirect, Route, Switch} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import {getIsAuthorized} from '../../modules/Auth/selectors';
 
 const Router = () => {

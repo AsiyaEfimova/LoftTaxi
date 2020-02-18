@@ -38,7 +38,7 @@ const InputAutocomplete = (props) => {
     return (
         <div className="autoCompleteBox" ref={container}>
             <Input
-                label="Срок действия:"
+                label={props.label}
                 type="text"
                 name={props.name}
                 value={props.value}

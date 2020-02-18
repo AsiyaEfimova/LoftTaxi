@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {postCardRequest, getCardRequest} from "../../modules/Profile/actions";
 import {getToken, getCard, getHasCard, getIsLoading, getError} from "../../modules/Profile/selectors";
+import { useForm } from 'react-hook-form';
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
 import Loader from "../../elements/Loader";
@@ -34,16 +35,20 @@ const PaymentForm = () => {
         setCard({...card, ...cardData});
     },[dispatch, cardData]);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleOnSubmit = (data) => {
+        // e.preventDefault();
         dispatch(postCardRequest(card));
     };
     const handlerInputChange = ({ name, value }) => {
         setCard({...card, [name]: value});
     };
 
+    const { register, handleSubmit, errors } = useForm({
+        mode: "onBlur"
+    });
+
     return (
-        <form className="paymentForm" onSubmit={handleSubmit}>
+        <form className="paymentForm" onSubmit={handleSubmit(handleOnSubmit)}>
             <h1>
                 Профиль
                 <small>Способ оплаты</small>
@@ -55,14 +60,34 @@ const PaymentForm = () => {
                         label="Номер карты:"
                         type="text"
                         name="cardNumber"
-                        value={card.cardNumber}
+                        // value={card.cardNumber}
+                        ref={register({
+                            required: "This is required",
+                            minLength: {
+                                value: 16,
+                                message: "Length is 16"
+                            },
+                            maxLength: {
+                                value: 16,
+                                message: "Length is 16"
+                            }
+                        })}
+                        errors={errors}
                         changeHandler={handlerInputChange}
                     />
                     <Input
                         label="Срок действия:"
                         type="text"
                         name="expiryDate"
-                        value={card.expiryDate}
+                        // value={card.expiryDate}
+                        ref={register({
+                            required: "This is required",
+                            pattern: {
+                                value: /^\d{1,2}\.\d{1,2}$/,
+                                message: "Invalid"
+                            }
+                        })}
+                        errors={errors}
                         changeHandler={handlerInputChange}
                     />
                 </fieldset>
@@ -71,14 +96,24 @@ const PaymentForm = () => {
                         label="Имя владельца:"
                         type="text"
                         name="cardName"
-                        value={card.cardName}
+                        // value={card.cardName}
+                        ref={register({required: "This is required"})}
+                        errors={errors}
                         changeHandler={handlerInputChange}
                     />
                     <Input
                         label="CVC:"
                         type="password"
                         name="cvc"
-                        value={card.cvc}
+                        // value={card.cvc}
+                        ref={register({
+                            required: "This is required",
+                            pattern: {
+                                value: /^\d{3}$/,
+                                message: "three-digit number"
+                            }
+                        })}
+                        errors={errors}
                         changeHandler={handlerInputChange}
                     />
                 </fieldset>

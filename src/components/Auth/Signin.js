@@ -23,19 +23,22 @@ const Signin = () => {
         dispatch(clearError());
     },[dispatch]);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        dispatch(postLoginRequest(user));
+    const handleOnSubmit = (data) => {
+        dispatch(postLoginRequest(data));
     };
 
     const handlerInputChange = ({ name, value }) => {
         setUser({...user, [name]: value});
     };
 
+    const { register, handleSubmit, errors } = useForm({
+        mode: "onBlur"
+    });
+
     return isAuthorized ? (
         <Redirect to="/map" />
     ) : (
-        <form className="entryForm" onSubmit={handleSubmit}>
+        <form className="entryForm" onSubmit={handleSubmit(handleOnSubmit)}>
             <h1>Войти</h1>
             <p>
                 Новый пользователь?{' '}
@@ -46,12 +49,28 @@ const Signin = () => {
                     label="Имя пользователя*"
                     type="text"
                     name="email"
+                    ref={register({
+                        pattern: {
+                            value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                            message: "Invalid"
+                        },
+                        required: 'Enter email'
+                    })}
+                    errors={errors}
                     changeHandler={handlerInputChange}
                 />
                 <Input
                     label="Пароль*"
                     type="password"
                     name="password"
+                    ref={register({
+                        required: "This is required",
+                        minLength: {
+                            value: 3,
+                            message: "Min length is 3"
+                        }
+                    })}
+                    errors={errors}
                     changeHandler={handlerInputChange}
                 />
             </div>

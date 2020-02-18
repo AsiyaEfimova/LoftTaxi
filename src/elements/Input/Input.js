@@ -1,39 +1,39 @@
 import React from 'react';
+import ErrorMessage from "../ErrorMessage";
 
-const Input = (props) => {
+const Input = React.forwardRef(({name, label, type, autoComplete, value, focusHandler, inputClass, errors, rulles}, ref) => {
     let className;
-    props.class ? (className = ' ' + props.class) : (className = '');
-    const ChangeHandler = (e) => {
-        if(props.changeHandler) {
-            props.changeHandler({name: props.name, value: e.target.value});
+    inputClass ? (className = ' ' + inputClass) : (className = '');
+    errors[name] && (className += ' error');
+    // const ChangeHandler = (e) => {
+    //     if(props.changeHandler) {
+    //         props.changeHandler({name: props.name, value: e.target.value});
+    //     }
+    // };
+    const handlerOnFocus = (e)=>{
+        if(focusHandler){
+            focusHandler(e.target);
         }
     };
-    const FocusHandler = (e)=>{
-        if(props.focusHandler){
-            props.focusHandler(e.target);
-        }
-    };
+    let errorMessage = '';
+    if(errors[name]){
+        rulles ? errorMessage = (rulles[errors[name].type]) : (errorMessage = errors[name].message)
+    }
     return (
         <div className={'input' + className}>
-            <label>{props.label}</label>
+            <label>{label}</label>
             <input
-                autoComplete={props.autoComplete}
-                type={props.type}
-                name={props.name}
-                value={props.value}
-                onChange={ChangeHandler}
-                onFocus={FocusHandler}
-                ref={props.register}
+                autoComplete={autoComplete}
+                type={type}
+                name={name}
+                value={value}
+                // onChange={ChangeHandler}
+                onFocus={handlerOnFocus}
+                ref={ref}
             />
+            <ErrorMessage error={errorMessage}/>
         </div>
     );
-};
+});
+
 export default Input;
-
-
-// const Input = ({ label, register, required }) => (
-//     <>
-//         <label>{label}</label>
-//         <input name={label} ref={register({ required })} />
-//     </>
-// )
