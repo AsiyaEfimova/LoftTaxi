@@ -4,7 +4,7 @@ import Header from '../Header';
 import Profile from '../Profile';
 import Map from '../Map';
 import Auth from '../Auth';
-import errorPage from "../errorPage";
+import errorPage from "../ErrorPage";
 import PrivateRoute from './PrivateRouter';
 import {Route, Switch} from 'react-router-dom';
 import {getIsAuthorized} from '../../modules/Auth/selectors';

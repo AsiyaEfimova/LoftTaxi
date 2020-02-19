@@ -24,20 +24,20 @@ const PaymentForm = () => {
         token = useSelector(getToken);
 
     useEffect((card)=>{
-        setCard({...card, ...cardData});
-    },[dispatch,cardData]);
-
-    useEffect((token)=>{
         dispatch(getCardRequest(token));
     },[dispatch]);
+
+    useEffect((card)=>{
+        console.log(cardData);
+        setCard({...card, ...cardData});
+    },[dispatch,cardData]);
 
     useEffect((card)=>{
         setCard({...card, ...cardData});
     },[dispatch, cardData]);
 
     const handleOnSubmit = (data) => {
-        // e.preventDefault();
-        dispatch(postCardRequest(card));
+        dispatch(postCardRequest(data));
     };
     const handlerInputChange = ({ name, value }) => {
         setCard({...card, [name]: value});
@@ -60,7 +60,7 @@ const PaymentForm = () => {
                         label="Номер карты:"
                         type="text"
                         name="cardNumber"
-                        // value={card.cardNumber}
+                        defaultValue={card.cardNumber}
                         ref={register({
                             required: "This is required",
                             minLength: {
@@ -79,7 +79,7 @@ const PaymentForm = () => {
                         label="Срок действия:"
                         type="text"
                         name="expiryDate"
-                        // value={card.expiryDate}
+                        defaultValue={card.expiryDate}
                         ref={register({
                             required: "This is required",
                             pattern: {
@@ -96,7 +96,7 @@ const PaymentForm = () => {
                         label="Имя владельца:"
                         type="text"
                         name="cardName"
-                        // value={card.cardName}
+                        defaultValue={card.cardName}
                         ref={register({required: "This is required"})}
                         errors={errors}
                         changeHandler={handlerInputChange}
@@ -105,7 +105,7 @@ const PaymentForm = () => {
                         label="CVC:"
                         type="password"
                         name="cvc"
-                        // value={card.cvc}
+                        defaultValue={card.cvc}
                         ref={register({
                             required: "This is required",
                             pattern: {

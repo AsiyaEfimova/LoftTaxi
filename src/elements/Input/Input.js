@@ -1,7 +1,7 @@
 import React from 'react';
 import ErrorMessage from "../ErrorMessage";
 
-const Input = React.forwardRef(({name, label, type, autoComplete, value, focusHandler, inputClass, errors, rulles}, ref) => {
+const Input = React.forwardRef(({name, label, type, autoComplete, defaultValue, focusHandler, inputClass, errors, rulles}, ref) => {
     let className;
     inputClass ? (className = ' ' + inputClass) : (className = '');
     errors[name] && (className += ' error');
@@ -21,7 +21,7 @@ const Input = React.forwardRef(({name, label, type, autoComplete, value, focusHa
                 autoComplete={autoComplete}
                 type={type}
                 name={name}
-                value={value}
+                defaultValue={defaultValue}
                 // onChange={ChangeHandler}
                 onFocus={handlerOnFocus}
                 ref={ref}

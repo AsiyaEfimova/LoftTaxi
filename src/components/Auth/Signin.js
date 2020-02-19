@@ -50,10 +50,10 @@ const Signin = () => {
                     type="text"
                     name="email"
                     ref={register({
-                        pattern: {
-                            value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                            message: "Invalid"
-                        },
+                        // pattern: {
+                        //     value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                        //     message: "Invalid"
+                        // },
                         required: 'Enter email'
                     })}
                     errors={errors}
@@ -66,8 +66,8 @@ const Signin = () => {
                     ref={register({
                         required: "This is required",
                         minLength: {
-                            value: 3,
-                            message: "Min length is 3"
+                            value: 1,
+                            message: "Min length is 1"
                         }
                     })}
                     errors={errors}
