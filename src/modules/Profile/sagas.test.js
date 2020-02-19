@@ -5,10 +5,8 @@ import {
     getCardSuccess,
     getCardFailure
 } from './actions';
-import {postCard, fetchCard, postLogin} from '../../api';
+import {postCard, fetchCard} from '../../api';
 import { postCardSagaWorker, fetchCardSagaWorker } from './sagas';
-import {loginSagaWorker} from "../Auth/sagas";
-import {postLoginFailure} from "../Auth/actions";
 
 describe('Тестирование postCardSagaWorker', () => {
     const testAction = {

@@ -1,42 +1,29 @@
-import {routeSaga} from './sagas';
+import { put, call } from 'redux-saga/effects';
+import {
+    fetchRouteSuccess,
+    fetchRouteFailure
+} from './actions';
 import {fetchRoute} from '../../api';
-import {recordSaga} from '../../TestUtils';
-import {fetchRouteRequest, fetchRouteSuccess} from './actions';
+import { routeSagaWorker } from './sagas';
 
-describe.only('routeSaga', () => {
-
-    // fetchRoute = jest.fn();
-    // selectors.isAuthenticated = jest.fn();
-
-    beforeEach(() => {
-        jest.resetAllMocks();
+describe('Тестирование routeSagaWorker', () => {
+    const testAction = {
+        payload: 'test'
+    };
+    it('routeSagaWorker c success true', () => {
+        const gen = routeSagaWorker(testAction);
+        expect(gen.next().value).toEqual(call(fetchRoute, testAction.payload));
+        const response = {
+            success: true
+        };
+        expect(gen.next(response).value).toEqual(put(fetchRouteSuccess(response)));
+        expect(gen.next().done).toEqual(true)
     });
-
-    it('should fail if not authenticated', async () => {
-        // selectors.isAuthenticated.mockImplementation(() => false);
-        const coords = [[30.272183, 59.80065],[30.27744, 59.799996],[30.282353, 59.796571]];
-        const initialAction = {addressFrom: 'addressFrom', addressTo: 'addressTo'};
-        const dispatched = await recordSaga(
-            routeSaga,
-            initialAction
-        );
-
-        expect(dispatched).toContainEqual(fetchRouteSuccess(coords));
-        // expect(api.getProfile).not.toHaveBeenCalled();
-    });
-
-    // it('should get profile from API and call success action if authenticated', async () => {
-    //     const someProfile = {name: 'Guy Incognito'};
-    //     api.getProfile.mockImplementation(() => someProfile);
-    //     selectors.isAuthenticated.mockImplementation(() => true);
-    //
-    //     const initialAction = {profileId: 1};
-    //     const dispatched = await recordSaga(
-    //         loadProfileSaga,
-    //         initialAction
-    //     );
-    //
-    //     expect(api.getProfile).toHaveBeenCalledWith(1);
-    //     expect(dispatched).toContainEqual(loadProfileSuccess(someProfile));
-    // });
+    it('routeSagaWorker заканчивает работу с проблемой сети', () => {
+        const error = new Error('error');
+        const gen = routeSagaWorker(testAction);
+        expect(gen.next().value).toEqual(call(fetchRoute, testAction.payload));
+        expect(gen.throw(error).value).toEqual(put(fetchRouteFailure(error)));
+        expect(gen.next().done).toEqual(true)
+    })
 });

@@ -6,13 +6,15 @@ import {
 } from './actions';
 import {fetchRoute} from '../../api';
 
+export function* routeSagaWorker (action){
+    try {
+        const response = yield call(fetchRoute, action.payload);
+        yield put(fetchRouteSuccess(response));
+    } catch (error) {
+        yield put(fetchRouteFailure(error));
+    }
+}
+
 export function* routeSaga (){
-    yield takeLatest(fetchRouteRequest, function*(action) {
-        try {
-            const response = yield call(fetchRoute, action.payload);
-            yield put(fetchRouteSuccess(response));
-        } catch (error) {
-            yield put(fetchRouteFailure(error));
-        }
-    });
+    yield takeLatest(fetchRouteRequest, routeSagaWorker);
 }

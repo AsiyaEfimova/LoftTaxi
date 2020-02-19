@@ -8,9 +8,6 @@ const InputAutocomplete = React.forwardRef(({name, label, type, value, focusHand
     const [inputValue, setValue] = useState({
         [name]: value
     });
-    const changeHandler = (inputData) => {
-        setValue({ ...inputValue, [name]: inputData.value });
-    };
     const handlerOnFocus = (e)=>{
         openList();
     };
@@ -27,7 +24,7 @@ const InputAutocomplete = React.forwardRef(({name, label, type, value, focusHand
         });
     };
     const clearInput = ()=>{
-        setValue({ ...inputValue, value: '' });
+        setValue({ ...inputValue, [name]: '' });
         closeList();
     };
     const selectItem = (e)=>{
@@ -48,7 +45,6 @@ const InputAutocomplete = React.forwardRef(({name, label, type, value, focusHand
                     type={type}
                     name={name}
                     defaultValue={inputValue[name]}
-                    // onChange={ChangeHandler}
                     onFocus={handlerOnFocus}
                     ref={ref}
                 />
