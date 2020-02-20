@@ -12,7 +12,6 @@ import {postCard, fetchCard} from '../../api';
 export function* postCardSagaWorker (action){
     try {
         const response = yield call(postCard, action.payload);
-        console.log('postCardSagaWorker', action.payload);
         response.success ?
             yield put(postCardSuccess(action.payload)) :
             yield put(postCardFailure(response));
@@ -24,7 +23,6 @@ export function* postCardSagaWorker (action){
 export function* fetchCardSagaWorker (action){
     try {
         const response = yield call(fetchCard, action.payload);
-        console.log(response);
         response.error ?
             yield put(getCardFailure(response)) :
             yield put(getCardSuccess(response));

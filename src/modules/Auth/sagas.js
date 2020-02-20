@@ -7,13 +7,22 @@ import {
     postRegisterSuccess,
     postRegisterFailure
 } from './actions';
-import {postLogin, postRegister} from '../../api';
+import {getCardSuccess} from '../Profile/actions'
+import {postLogin, postRegister, fetchCard} from '../../api';
 import {setItems, removeItems} from '../../services/localSrorage';
+
+export function* fetchCardWorker (action){
+    const response = yield call(fetchCard, action.payload);
+    if(!response.error){
+        yield put(getCardSuccess(response));
+    }
+}
 
 export function* loginSagaWorker (action){
     try {
         const response = yield call(postLogin, action.payload);
         if(response.success) {
+            yield call(fetchCardWorker, response.token);
             yield put(postLoginSuccess(response));
             setItems('user', {
                 email: action.payload.email,

@@ -25,7 +25,9 @@ const PaymentForm = () => {
 
     useEffect((card)=>{
         setCard({...card, token: token});
-        dispatch(getCardRequest(token));
+        if(!hasCard) {
+            dispatch(getCardRequest(token));
+        }
     },[dispatch,token]);
 
     useEffect((card)=>{

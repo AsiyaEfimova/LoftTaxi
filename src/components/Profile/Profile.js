@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {getCardRequest} from "../../modules/Profile/actions";
+import {getCardRequest, getCardSuccess} from "../../modules/Profile/actions";
 import PaymentForm from '../PaymentForm';
 import Alert from '../../elements/Alert';
 import './profile.scss';
@@ -12,9 +12,10 @@ class Profile extends React.Component {
         addedCard: false
     };
     componentDidMount() {
-        console.log(this.state.hasCard);
-        const {getCardRequest} = this.props;
-        getCardRequest(this.props.token);
+        if(!this.props.hasCard) {
+            const {getCardRequest} = this.props;
+            getCardRequest(this.props.token);
+        }
     }
     componentDidUpdate(prevProps, prevState) {
         if(this.props !== prevProps){
@@ -44,7 +45,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-    getCardRequest
+    getCardRequest,
+    getCardSuccess
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
