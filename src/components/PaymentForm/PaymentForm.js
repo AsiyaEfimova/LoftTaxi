@@ -24,23 +24,18 @@ const PaymentForm = () => {
         token = useSelector(getToken);
 
     useEffect((card)=>{
+        setCard({...card, token: token});
         dispatch(getCardRequest(token));
-    },[dispatch]);
+    },[dispatch,token]);
 
     useEffect((card)=>{
-        console.log(cardData);
         setCard({...card, ...cardData});
     },[dispatch,cardData]);
 
-    useEffect((card)=>{
-        setCard({...card, ...cardData});
-    },[dispatch, cardData]);
-
     const handleOnSubmit = (data) => {
+        setCard({...card, ...data});
+        data.token = token;
         dispatch(postCardRequest(data));
-    };
-    const handlerInputChange = ({ name, value }) => {
-        setCard({...card, [name]: value});
     };
 
     const { register, handleSubmit, errors } = useForm({
@@ -73,7 +68,6 @@ const PaymentForm = () => {
                             }
                         })}
                         errors={errors}
-                        changeHandler={handlerInputChange}
                     />
                     <Input
                         label="Срок действия:"
@@ -88,7 +82,6 @@ const PaymentForm = () => {
                             }
                         })}
                         errors={errors}
-                        changeHandler={handlerInputChange}
                     />
                 </fieldset>
                 <fieldset className="card">
@@ -99,7 +92,6 @@ const PaymentForm = () => {
                         defaultValue={card.cardName}
                         ref={register({required: "This is required"})}
                         errors={errors}
-                        changeHandler={handlerInputChange}
                     />
                     <Input
                         label="CVC:"
@@ -114,7 +106,6 @@ const PaymentForm = () => {
                             }
                         })}
                         errors={errors}
-                        changeHandler={handlerInputChange}
                     />
                 </fieldset>
             </div>

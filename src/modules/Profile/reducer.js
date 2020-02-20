@@ -6,13 +6,13 @@ export const cardReducer = (state = initialState.cardReducer, action) => {
         case postCardRequest.toString():
             return { ...state, isLoading: true, error: '' };
         case postCardSuccess.toString():
-            return { ...state, isLoading: false, hasCard: true, error: '' };
+            return { ...state, isLoading: false, addedCard: true, hasCard: true, cardNumber: action.payload.cardNumber, expiryDate: action.payload.expiryDate, cardName: action.payload.cardName, cvc: action.payload.cvc, error: '' };
         case postCardFailure.toString():
-            return { ...state, isLoading: false, hasCard: false, error: action.payload.error };
+            return { ...state, isLoading: false, addedCard: false, error: action.payload.error };
         case getCardRequest.toString():
             return { ...state, isLoading: true, error: '' };
         case getCardSuccess.toString():
-            return { ...state, isLoading: false, cardNumber: action.payload.cardNumber, expiryDate: action.payload.expiryDate, cardName: action.payload.cardName, cvc: action.payload.cvc, error: '' };
+            return { ...state, isLoading: false, hasCard: true, cardNumber: action.payload.cardNumber, expiryDate: action.payload.expiryDate, cardName: action.payload.cardName, cvc: action.payload.cvc, error: '' };
         case getCardFailure.toString():
             return { ...state, isLoading: false, hasCard: false, error: action.payload.error };
         default:

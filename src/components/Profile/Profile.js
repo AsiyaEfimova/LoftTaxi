@@ -8,9 +8,11 @@ import './profile.scss';
 class Profile extends React.Component {
     state = {
         token: '',
-        hasCard: false
+        hasCard: false,
+        addedCard: false
     };
     componentDidMount() {
+        console.log(this.state.hasCard);
         const {getCardRequest} = this.props;
         getCardRequest(this.props.token);
     }
@@ -20,12 +22,12 @@ class Profile extends React.Component {
         }
     }
     render() {
-        const {hasCard} = this.state;
+        const {addedCard} = this.state;
         return (
             <div id="page">
                 <div className="widthFix">
                     <div className="profileBlock">
-                        {hasCard ?
+                        {addedCard ?
                             <Alert header="Профиль" body="Информация об оплате добавлена. Можете перейти к заказу такси." linkText="Перейти на карту" linkTo="/map" /> : <PaymentForm />
                         }
                     </div>
@@ -37,7 +39,8 @@ class Profile extends React.Component {
 
 const mapStateToProps = (state) => ({
     token: state.loginReducer.token,
-    hasCard: state.cardReducer.hasCard
+    hasCard: state.cardReducer.hasCard,
+    addedCard: state.cardReducer.addedCard
 });
 
 const mapDispatchToProps = {
