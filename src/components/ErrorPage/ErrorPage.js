@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../img/logo-white.png';
 import "./error.scss";
 
-const errorPage = () => {
+const ErrorPage = () => {
     return (
         <div id="page">
             <div className="widthFix">
@@ -23,4 +23,4 @@ const errorPage = () => {
     );
 };
 
-export default errorPage;
+export default ErrorPage;
